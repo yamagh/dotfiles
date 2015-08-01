@@ -75,7 +75,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/Users/yamagh/GoogleDrive/MBA/bin"
+export PATH=~/bin
 export PATH=$PATH":/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:"
 # export MANPATH="/usr/local/man:$MANPATH"
 export PATH=$HOME/.cabal/bin:$PATH
@@ -112,7 +112,8 @@ alias ojy="oj --yukicoder"
 
 # todo.txt ####################################################################
 
-alias t="todo.sh -t"
+# `t` option is prepend the current date to a task automatically
+alias t="todo -t -d ~/.todo/todo.cfg"
 
 # ithief ######################################################################
 
