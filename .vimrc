@@ -1,37 +1,53 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" GENERAL
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Use Vim settings, rather than Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
+" Use Vim settings
 set nocompatible
 
-" Color theme
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GENERAL SETTINGS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" ------
+" EDITOR
+" ------
+
 colorscheme molokai
+"colorscheme jellybeans
 "colorscheme vividchalk 
 
-set colorcolumn=80
-set history=50			" keep 50 lines of command line history
-set ruler			" show the cursor position all the time
-set showcmd			" display incomplete commands
-set incsearch			" インクリメンタルサーチ
 set backspace=indent,eol,start	" allow backspacing over everything in insert mode
-set nobackup			" バックアップをしない
-set nowritebackup		" バックアップファイルを作らない
-set noswapfile			" .swapファイルを作らない
-set number			" 行番号
+set colorcolumn=80
 set encoding=utf8
-set scrolloff=5			" スクロールする時に下が見えるようにする
 set guicursor=a:blinkon0	" Disable cursol blink
-set clipboard=unnamed,autoselect " ClipBoard integration with OS X
+set history=100
+set incsearch
 set list			" 不可視文字
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
+set number
+set showcmd
+set ruler
+set scrolloff=5
+
+set clipboard=unnamed,autoselect " ClipBoard integration with OS X
+set nobackup
+set noswapfile
+set nowritebackup
+
+if has('mouse')
+  set mouse=a
+endif
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set hlsearch
+endif
+
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEY SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" 入力モード中に素早くJJと入力した場合はESCとみなす
 inoremap jj <ESC>
 " ESCを二回押すことでハイライトを消す
 nmap <silent> <Esc><Esc> :nohlsearch<CR>
@@ -51,58 +67,44 @@ map Q gq
 
 " CTRL-U in insert mode deletes a lot
 inoremap <C-U> <C-G>u<C-U>
-" Execute Ruby
-nnoremap <C-e> :!ruby %
 
-" In many terminal emulators the mouse works just fine, thus enable it.
-if has('mouse')
-  set mouse=a
-endif
+inoremap <C-r>r <ESC>:QuickRun<CR>i<Right>
 
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
-endif
+"" Only do this part when compiled with support for autocommands.
+"if has("autocmd")
+"
+"  " Enable file type detection.  Use the default filetype settings, so that
+"  " mail gets 'tw' set to 72,
+"  " 'cindent' is on in C files, etc.
+"  " Also load indent files, to automatically do language-dependent indenting.
+"  filetype plugin indent on
+"
+"  " Put these in an autocmd group, so that we can delete them easily.
+"  augroup vimrcEx
+"  au!
+"
+"  " For all text files set 'textwidth' to 78 characters.
+"  autocmd FileType text setlocal textwidth=78
+"
+"  " When editing a file, always jump to the last known cursor position.
+"  " Don't do it when the position is invalid or when inside an event handler
+"  " (happens when dropping a file on gvim).
+"  " Also don't do it when the mark is in the first line, that is the default
+"  " position when opening a file.
+"  autocmd BufReadPost *
+"    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+"    \   exe "normal! g`\"" |
+"    \ endif
+"
+"  augroup END
+"
+"else
+"
+"  set autoindent		" always set autoindenting on
+"
+"endif " has("autocmd")
 
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
-
-  " Enable file type detection.  Use the default filetype settings, so that
-  " mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
-
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
-  au!
-
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
-
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  " (happens when dropping a file on gvim).
-  " Also don't do it when the mark is in the first line, that is the default
-  " position when opening a file.
-  autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
-
-  augroup END
-
-else
-
-  set autoindent		" always set autoindenting on
-
-endif " has("autocmd")
-
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
-" Only define it when not defined already.
+" カレントバッファの編集前後のDiff表示
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
 		  \ | wincmd p | diffthis
@@ -111,30 +113,52 @@ endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NeoBundle 
+" NeoBundle
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set runtimepath+=~/.vim/bundle/neobundle.vim/
+" --------
+" Settings
+" --------
+
+if has('vim_starting')
+  " If NeoBundle is Not installed, Install it automatically.
+  if !isdirectory(expand("~/.vim/bundle/neobundle.vim/"))
+    echo "install neobundle..."
+    :call system("git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim")
+  endif
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+let g:neobundle_default_git_protocol='https'
+
+" -------
+" Plugins
+" -------
+
 call neobundle#begin(expand('~/.vim/bundle/'))
 
-" neobundle自体をneobundleで管理
-NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle 'tomasr/molokai'
+NeoBundle 'nanotech/jellybeans.vim'
 
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'Townk/vim-autoclose'
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'grep.vim'
-NeoBundle 'slim-template/vim-slim'
+NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimproc', {
   \ 'build' : {
   \     'mac' : 'make -f make_mac.mak',
   \     'unix' : 'make -f make_unix.mak',
   \    },
   \ }
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'Townk/vim-autoclose'
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'grep.vim'
+NeoBundle 'slim-template/vim-slim'
 NeoBundleLazy 'supermomonga/neocomplete-rsense.vim', { 'autoload' : {
   \ 'insert' : 1,
   \ 'filetypes': 'ruby',
   \ }}
+NeoBundle 'vim-jp/vimdoc-ja'
+NeoBundle 'thinca/vim-quickrun'
 
 " .や::を入力したときにオムニ補完が有効になるようにする
 if !exists('g:neocomplete#force_omni_input_patterns')
