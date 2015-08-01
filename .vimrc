@@ -68,7 +68,7 @@ map Q gq
 " CTRL-U in insert mode deletes a lot
 inoremap <C-U> <C-G>u<C-U>
 
-inoremap <C-r>r <ESC>:QuickRun<CR>i<Right>
+"inoremap <C-r>r <ESC>:QuickRun<CR>i<Right>
 
 "" Only do this part when compiled with support for autocommands.
 "if has("autocmd")
@@ -116,9 +116,9 @@ endif
 " NeoBundle
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" --------
+" #####################################
 " Settings
-" --------
+" #####################################
 
 if has('vim_starting')
   " If NeoBundle is Not installed, Install it automatically.
@@ -131,9 +131,9 @@ endif
 
 let g:neobundle_default_git_protocol='https'
 
-" -------
+" #####################################
 " Plugins
-" -------
+" #####################################
 
 call neobundle#begin(expand('~/.vim/bundle/'))
 
@@ -160,7 +160,11 @@ NeoBundleLazy 'supermomonga/neocomplete-rsense.vim', { 'autoload' : {
   \ }}
 NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'thinca/vim-quickrun', {
+  \ 'autoload' : {
+  \   'mappings' : [['n', '\r']],
+  \   'commands' : ['QuickRun']
+  \u}}
 
 " .や::を入力したときにオムニ補完が有効になるようにする
 if !exists('g:neocomplete#force_omni_input_patterns')
@@ -170,6 +174,50 @@ let g:neocomplete#force_omni_input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 
 " 環境変数RSENSE_HOMEに'/usr/local/bin/rsense'を指定しても動く
 let g:neocomplete#sources#rsense#home_directory = '/usr/local/bin/rsense'
+
+" =======================================
+" EasyMotion {{{
+" =======================================
+NeoBundle 'Lokaltog/vim-easymotion'
+let g:EasyMotion_do_mapping = 0
+" ------------
+" Find Motions
+" ------------
+nmap f <Plug>(easymotion-s2)
+xmap f <Plug>(easymotion-s2)
+omap f <Plug>(easymotion-s2)
+" Turn on case sensitive feature
+let g:EasyMotion_smartcase = 1
+" ------------
+" Line Motions
+" ------------
+" `JK` Motions: Extend line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+" keep cursor column with `JK` motions
+let g:EasyMotion_startofline = 0
+" ------------
+" General Configuration
+" ------------
+let g:EasyMotion_keys = ';HKLYUIOPNM,QWERTASDGZXCVBJF'
+" Show target key with upper case to improve readability
+let g:EasyMotion_use_upper = 1
+" Jump to first match with enter & space
+let g:EasyMotion_enter_jump_first = 1
+let g:EasyMotion_space_jump_first = 1
+" ------------
+" Search Motions
+" ------------
+" Extend search motions with vital-over command line interface
+" Incremental highlight of all the matches
+" Now, you don't need to repetitively press `n` or `N` with EasyMotion feature
+" `<Tab>` & `<S-Tab>` to scroll up/down a page with next match
+" :h easymotion-command-line
+nmap g/ <Plug>(easymotion-sn)
+xmap g/ <Plug>(easymotion-sn)
+omap g/ <Plug>(easymotion-tn)
+" }}}
+
 
 
 call neobundle#end()
