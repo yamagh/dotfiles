@@ -1,31 +1,42 @@
-" Color theme
-colorscheme molokai
-"colorscheme vividchalk 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GENERAL
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" インクレメンタルサーチ
-set backspace=indent,eol,start		" allow backspacing over everything in insert mode
-set nobackup		" バックアップをしない
-set nowritebackup	" バックアップファイルを作らない
-set noswapfile		" .swapファイルを作らない
-set number		" 行番号
+" Color theme
+colorscheme molokai
+"colorscheme vividchalk 
+
+set colorcolumn=80
+set history=50			" keep 50 lines of command line history
+set ruler			" show the cursor position all the time
+set showcmd			" display incomplete commands
+set incsearch			" インクリメンタルサーチ
+set backspace=indent,eol,start	" allow backspacing over everything in insert mode
+set nobackup			" バックアップをしない
+set nowritebackup		" バックアップファイルを作らない
+set noswapfile			" .swapファイルを作らない
+set number			" 行番号
 set encoding=utf8
-set scrolloff=5		" スクロールする時に下が見えるようにする:w
-set guicursor=a:blinkon0		" Disable cursol blink
-set clipboard=unnamed,autoselect	" ClipBoard integration with OS X
-set list		" 不可視文字
+set scrolloff=5			" スクロールする時に下が見えるようにする
+set guicursor=a:blinkon0	" Disable cursol blink
+set clipboard=unnamed,autoselect " ClipBoard integration with OS X
+set list			" 不可視文字
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" KEY SETTINGS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " 入力モード中に素早くJJと入力した場合はESCとみなす
 inoremap jj <ESC>
 " ESCを二回押すことでハイライトを消す
 nmap <silent> <Esc><Esc> :nohlsearch<CR>
+
+nmap s <C-W>
 
 " 検索後にジャンプした際に検索単語を画面中央に持ってくる
 nnoremap n nzz
@@ -58,8 +69,8 @@ endif
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
 
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
+  " Enable file type detection.  Use the default filetype settings, so that
+  " mail gets 'tw' set to 72,
   " 'cindent' is on in C files, etc.
   " Also load indent files, to automatically do language-dependent indenting.
   filetype plugin indent on
@@ -99,7 +110,9 @@ endif
 
 
 
-" # Neobundle #################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NeoBundle 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set runtimepath+=~/.vim/bundle/neobundle.vim/
 call neobundle#begin(expand('~/.vim/bundle/'))
@@ -140,6 +153,5 @@ NeoBundleCheck
 
 hi IndentGuidesOdd  ctermbg=black
 hi IndentGuidesEven ctermbg=darkgrey
-
 
 
