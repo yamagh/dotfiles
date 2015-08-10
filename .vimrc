@@ -2,117 +2,6 @@
 set nocompatible
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" GENERAL SETTINGS
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" ------
-" EDITOR
-" ------
-
-colorscheme molokai
-"colorscheme jellybeans
-"colorscheme vividchalk 
-
-set backspace=indent,eol,start	" allow backspacing over everything in insert mode
-set colorcolumn=80
-set encoding=utf8
-set guicursor=a:blinkon0	" Disable cursol blink
-set history=100
-set incsearch
-set list			" 不可視文字
-set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
-set number
-set showcmd
-set ruler
-set scrolloff=5
-
-set clipboard=unnamed,autoselect " ClipBoard integration with OS X
-set nobackup
-set noswapfile
-set nowritebackup
-
-if has('mouse')
-  set mouse=a
-endif
-
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
-endif
-
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" KEY SETTINGS
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-inoremap jj <ESC>
-" ESCを二回押すことでハイライトを消す
-nmap <silent> <Esc><Esc> :nohlsearch<CR>
-
-nmap s <C-W>
-
-" 検索後にジャンプした際に検索単語を画面中央に持ってくる
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap * *zz
-nnoremap # #zz
-nnoremap g* g*zz
-nnoremap g# g#zz
-
-" Don't use Ex mode, use Q for formatting
-map Q gq
-
-" CTRL-U in insert mode deletes a lot
-inoremap <C-U> <C-G>u<C-U>
-
-"inoremap <C-r>r <ESC>:QuickRun<CR>i<Right>
-
-"" Only do this part when compiled with support for autocommands.
-"if has("autocmd")
-"
-"  " Enable file type detection.  Use the default filetype settings, so that
-"  " mail gets 'tw' set to 72,
-"  " 'cindent' is on in C files, etc.
-"  " Also load indent files, to automatically do language-dependent indenting.
-"  filetype plugin indent on
-"
-"  " Put these in an autocmd group, so that we can delete them easily.
-"  augroup vimrcEx
-"  au!
-"
-"  " For all text files set 'textwidth' to 78 characters.
-"  autocmd FileType text setlocal textwidth=78
-"
-"  " When editing a file, always jump to the last known cursor position.
-"  " Don't do it when the position is invalid or when inside an event handler
-"  " (happens when dropping a file on gvim).
-"  " Also don't do it when the mark is in the first line, that is the default
-"  " position when opening a file.
-"  autocmd BufReadPost *
-"    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-"    \   exe "normal! g`\"" |
-"    \ endif
-"
-"  augroup END
-"
-"else
-"
-"  set autoindent		" always set autoindenting on
-"
-"endif " has("autocmd")
-
-" カレントバッファの編集前後のDiff表示
-if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
-endif
-
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NeoBundle
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -223,6 +112,117 @@ omap g/ <Plug>(easymotion-tn)
 call neobundle#end()
 filetype plugin indent on
 NeoBundleCheck
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GENERAL SETTINGS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" ------
+" EDITOR
+" ------
+
+colorscheme molokai
+"colorscheme jellybeans
+"colorscheme vividchalk 
+
+set backspace=indent,eol,start	" allow backspacing over everything in insert mode
+set colorcolumn=80
+set encoding=utf8
+set guicursor=a:blinkon0	" Disable cursol blink
+set history=100
+set incsearch
+set list			" 不可視文字
+set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
+set number
+set showcmd
+set ruler
+set scrolloff=5
+
+set clipboard=unnamed,autoselect " ClipBoard integration with OS X
+set nobackup
+set noswapfile
+set nowritebackup
+
+if has('mouse')
+  set mouse=a
+endif
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set hlsearch
+endif
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" KEY SETTINGS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+inoremap jj <ESC>
+" ESCを二回押すことでハイライトを消す
+nmap <silent> <Esc><Esc> :nohlsearch<CR>
+
+nmap s <C-W>
+
+" 検索後にジャンプした際に検索単語を画面中央に持ってくる
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
+
+" Don't use Ex mode, use Q for formatting
+map Q gq
+
+" CTRL-U in insert mode deletes a lot
+inoremap <C-U> <C-G>u<C-U>
+
+"inoremap <C-r>r <ESC>:QuickRun<CR>i<Right>
+
+"" Only do this part when compiled with support for autocommands.
+"if has("autocmd")
+"
+"  " Enable file type detection.  Use the default filetype settings, so that
+"  " mail gets 'tw' set to 72,
+"  " 'cindent' is on in C files, etc.
+"  " Also load indent files, to automatically do language-dependent indenting.
+"  filetype plugin indent on
+"
+"  " Put these in an autocmd group, so that we can delete them easily.
+"  augroup vimrcEx
+"  au!
+"
+"  " For all text files set 'textwidth' to 78 characters.
+"  autocmd FileType text setlocal textwidth=78
+"
+"  " When editing a file, always jump to the last known cursor position.
+"  " Don't do it when the position is invalid or when inside an event handler
+"  " (happens when dropping a file on gvim).
+"  " Also don't do it when the mark is in the first line, that is the default
+"  " position when opening a file.
+"  autocmd BufReadPost *
+"    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+"    \   exe "normal! g`\"" |
+"    \ endif
+"
+"  augroup END
+"
+"else
+"
+"  set autoindent		" always set autoindenting on
+"
+"endif " has("autocmd")
+
+" カレントバッファの編集前後のDiff表示
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+		  \ | wincmd p | diffthis
+endif
+
 
 
 hi IndentGuidesOdd  ctermbg=black
