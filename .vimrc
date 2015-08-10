@@ -2,6 +2,31 @@
 set nocompatible
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Variables
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Bool
+let s:true  = 1
+let s:false = 0
+
+" Platform
+let s:is_windows = has('win16') || has('win32') || has('win64')
+let s:is_cygwin  = has('win32unix')
+let s:is_mac     = !s:is_windows && !s:is_cygwin
+        \ && (has('mac') || has('macunix') || has('gui_macvim') || 
+        \     (!executable('xdg-open') && system('uname') =~? '^darwin'))
+let s:is_linux   = !s:is_mac && has('unix')
+
+" NeoBundle Path
+if s:is_windows
+  let $DOTVIM = expand('~/vimfiles')
+else
+  let $DOTVIM = expand('~/.vim')
+endif
+let $VIMBUNDLE = $DOTVIM . '/bundle'
+let $NEOBUNDLEPATH = $VIMBUNDLE . '/neobundle.vim'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NeoBundle
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -11,11 +36,11 @@ set nocompatible
 
 if has('vim_starting')
   " If NeoBundle is Not installed, Install it automatically.
-  if !isdirectory(expand("~/.vim/bundle/neobundle.vim/"))
+  if !isdirectory(expand($NEOBUNDLEPATH))
     echo "install neobundle..."
-    :call system("git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim")
+    :call system("git clone git://github.com/Shougo/neobundle.vim " . $NEOBUNDLEPATH)
   endif
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
+  set runtimepath+=$NEOBUNDLEPATH
 endif
 
 let g:neobundle_default_git_protocol='https'
@@ -24,7 +49,7 @@ let g:neobundle_default_git_protocol='https'
 " Plugins
 " #####################################
 
-call neobundle#begin(expand('~/.vim/bundle/'))
+call neobundle#begin(expand($VIMBUNDLE))
 
 NeoBundle 'tomasr/molokai'
 NeoBundle 'nanotech/jellybeans.vim'
