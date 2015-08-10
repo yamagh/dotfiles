@@ -141,7 +141,7 @@ NeoBundle 'tomasr/molokai'
 NeoBundle 'nanotech/jellybeans.vim'
 
 NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/neocomplete.vim'
+"NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimproc', {
   \ 'build' : {
@@ -154,7 +154,7 @@ NeoBundle 'Townk/vim-autoclose'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'grep.vim'
 NeoBundle 'slim-template/vim-slim'
-NeoBundleLazy 'supermomonga/neocomplete-rsense.vim', { 'autoload' : {
+"NeoBundleLazy 'supermomonga/neocomplete-rsense.vim', { 'autoload' : {
   \ 'insert' : 1,
   \ 'filetypes': 'ruby',
   \ }}
@@ -164,16 +164,16 @@ NeoBundle 'thinca/vim-quickrun', {
   \ 'autoload' : {
   \   'mappings' : [['n', '\r']],
   \   'commands' : ['QuickRun']
-  \u}}
+  \ }}
 
-" .や::を入力したときにオムニ補完が有効になるようにする
-if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_omni_input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-
-" 環境変数RSENSE_HOMEに'/usr/local/bin/rsense'を指定しても動く
-let g:neocomplete#sources#rsense#home_directory = '/usr/local/bin/rsense'
+"" .や::を入力したときにオムニ補完が有効になるようにする
+"if !exists('g:neocomplete#force_omni_input_patterns')
+"  let g:neocomplete#force_omni_input_patterns = {}
+"endif
+"let g:neocomplete#force_omni_input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+"
+"" 環境変数RSENSE_HOMEに'/usr/local/bin/rsense'を指定しても動く
+"let g:neocomplete#sources#rsense#home_directory = '/usr/local/bin/rsense'
 
 " =======================================
 " EasyMotion {{{
