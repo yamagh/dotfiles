@@ -108,7 +108,7 @@ zshaddhistory() {
 	]]
 }
 
-alias ojy="oj --yukicoder"
+alias ojy="python ~/dev/github/OnlineJudgeHelper/oj.py --yukicoder"
 
 # todo.txt ####################################################################
 

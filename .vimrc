@@ -1,10 +1,14 @@
 "scriptencoding utf8
 
-" Use Vim settings
-set nocompatible
+if has('vim_starting')
+  " Use Vim settings
+  set nocompatible
+endif
 
 " ============================================================================
-" VARIABLES
+"  VARIABLES
+"
+let mapleader="\<Space>"
 
 " Bool
 let s:true  = 1
@@ -27,13 +31,15 @@ endif
 let $VIMBUNDLE = $DOTVIM . '/bundle'
 let $NEOBUNDLEPATH = $VIMBUNDLE . '/neobundle.vim'
 
+
+
 " ============================================================================
-" NeoBundle INSTALL
+"  NeoBundle Core
 
 if has('vim_starting')
   " If NeoBundle is Not installed, Install it automatically.
   if !isdirectory(expand($NEOBUNDLEPATH))
-    echo "install neobundle..."
+    echo "Install NeoBundle..."
     :call system("git clone git://github.com/Shougo/neobundle.vim " . $NEOBUNDLEPATH)
   endif
   set runtimepath+=$NEOBUNDLEPATH
@@ -42,12 +48,37 @@ let g:neobundle_default_git_protocol='https'
 
 " BEGIN {{{
 call neobundle#begin(expand($VIMBUNDLE))
+NeoBundleFetch 'Shougo/neobundle.vim'
+
 
 " ============================================================================
-" PLUGINS
+"  NeoBundle Install Packages
 
-NeoBundleFetch 'Shougo/neobundle.vim'
+" Color Scheme {{{
+NeoBundle 'tomasr/molokai'
+NeoBundle 'nanotech/jellybeans.vim'
+" }}}
+
+" Vim-Session {{{
+NeoBundle 'xolox/vim-misc'
+NeoBundle 'xolox/vim-session'
+let g:session_directory = "~/.vim/session"
+let g:session_autoload = "no"
+let g:session_autosave = "no"
+let g:session_command_aliases = 1
+nnoremap <leader>so :OpenSession
+nnoremap <leader>ss :SaveSession
+nnoremap <leader>sd :DeleteSession<CR>
+nnoremap <leader>sc :CloseSession<CR>
+" }}}
+
+" HTML/CSS {{{
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'slim-template/vim-slim'
+" }}}
+
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/vimproc', {
   \ 'build' : {
   \     'mac' : 'make -f make_mac.mak',
@@ -55,13 +86,9 @@ NeoBundle 'Shougo/vimproc', {
   \    },
   \ }
 "NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'tomasr/molokai'
-NeoBundle 'nanotech/jellybeans.vim'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'Townk/vim-autoclose'
-NeoBundle 'mattn/emmet-vim'
 NeoBundle 'grep.vim'
-NeoBundle 'slim-template/vim-slim'
 "NeoBundleLazy 'supermomonga/neocomplete-rsense.vim', { 'autoload' : {
 "  \ 'insert' : 1,
 "  \ 'filetypes': 'ruby',
@@ -91,9 +118,9 @@ NeoBundle 'wakatime/vim-wakatime'
 NeoBundle 'Lokaltog/vim-easymotion'
 let g:EasyMotion_do_mapping = 0
 " Find Motions
-nmap ff <Plug>(easymotion-s2)
-xmap ff <Plug>(easymotion-s2)
-omap ff <Plug>(easymotion-s2)
+nmap <Leader>f <Plug>(easymotion-s2)
+xmap <Leader>f <Plug>(easymotion-s2)
+omap <Leader>f <Plug>(easymotion-s2)
 " Turn on case sensitive feature
 let g:EasyMotion_smartcase = 1
 " Line Motions
@@ -127,7 +154,7 @@ NeoBundleCheck
 
 
 " ============================================================================
-" COLOR SCHEME
+"  COLOR SCHEME
 
 set t_Co=256
 colorscheme molokai
@@ -135,16 +162,53 @@ colorscheme molokai
 "colorscheme vividchalk 
 
 " ============================================================================
-" EDITOR
+"  BASIC SETUP
 
+" Encoding
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8
+
+set bomb
+set binary
+set ttyfast
+
+" allow backspacing over everything in insert mode
 set backspace=indent,eol,start
-    " allow backspacing over everything in insert mode
-set colorcolumn=80
-"set encoding=utf8
-set guicursor=a:blinkon0
-    " Disable cursol blink
-set history=100
+
+" Tabs (May be overriten by autocmd rules)
+set tabstop=4
+set softtabstop=0
+set shiftwidth=4
+set expandtab
+
+" Searching
+set hlsearch
 set incsearch
+set ignorecase
+set smartcase
+
+" Backup
+set nobackup
+"set nowritebackup
+set noswapfile
+
+" EOL
+"set nofixeol
+
+" ClipBoard integration with OS X
+set clipboard=unnamed,autoselect
+
+" ============================================================================
+"  VISUAL SETTINGS
+
+syntax on
+
+" Disable cursol blink
+set guicursor=a:blinkon0
+
+set colorcolumn=80
+set history=100
 set list
 if s:is_mac
   set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
@@ -153,25 +217,12 @@ set number
 set showcmd
 set ruler
 set scrolloff=5
-set clipboard=unnamed,autoselect
-    " ClipBoard integration with OS X
-set nobackup
-set noswapfile
-set nowritebackup
 set mousehide
-
 set laststatus=2
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l/%L,%c%V%8P
 
 if has('mouse')
   set mouse=a
-endif
-
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
 endif
 
 if &guioptions =~# 'M'
@@ -180,9 +231,13 @@ endif
 
 
 " ============================================================================
-" KEY MAPPING
+"  KEY MAPPING
 
 inoremap jj <ESC>
+
+" CTRL-U in insert mode deletes a lot
+inoremap <C-U> <C-G>u<C-U>
+
 " ESCを二回押すことでハイライトを消す
 nmap <silent> <Esc><Esc> :nohlsearch<CR>
 
@@ -199,8 +254,6 @@ nnoremap g# g#zz
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
-" CTRL-U in insert mode deletes a lot
-inoremap <C-U> <C-G>u<C-U>
 
 "inoremap <C-r>r <ESC>:QuickRun<CR>i<Right>
 
@@ -251,7 +304,7 @@ hi IndentGuidesEven ctermbg=darkgrey
 
 
 " ============================================================================
-" SETTINGS FOR Windows
+"  SETTINGS FOR Windows
 
 if s:is_windows
   set guifont=MS_Gothic:h9:cSHIFTJIS
@@ -271,11 +324,18 @@ if s:is_windows
     endif
   endif
   set guioptions-=T
+
+  " Menubar lang change to Japanese
+  if has('gui_running')
+    source $VIMRUNTIME/delmenu.vim
+    set langmenu=ja_jp.utf-8
+    source $VIMRUNTIME/menu.vim
+  endif
 endif
 
 
 " ============================================================================
-" SETTINGS FOR Japanease
+"  SETTINGS FOR Japanease
 
 if has('multi_byte_ime') || has('xim')
   highlight CursorIM guibg=Purple guifg=NONE

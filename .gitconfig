@@ -1,0 +1,13 @@
+[user]
+[user]
+	name = yamagh
+	email = hiroyuki.yamagami@gmail.com
+[filter "media"]
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
+[alias]
+	ch = checkout
+	st = status
+	br = branch
+	co = commit

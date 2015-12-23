@@ -3,4 +3,5 @@ FROM=/Volumes/IO-Drive/
 TO=/Volumes/Q-Drive/IO-Drive
 echo FROM : $FROM
 echo TO   : $TO
-rsync -av $FROM $TO
+rsync -av --delete $FROM $TO
+#rsync -av --exclude '.*' --delete $FROM $TO
