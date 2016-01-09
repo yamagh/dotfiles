@@ -51,8 +51,11 @@ alias terminal 'ターミナル'
 alias safari   'Safari'
 alias twitter  'Twitter'
 alias vim      'MacVim'
-bind 1:alt focus ${safari}
-bind 2:alt focus ${terminal}
+alias atom     'Atom'
+alias chrome   'Chrome'
+bind 1:alt focus ${terminal}
+bind 2:alt focus ${atom}
+bind 3:alt focus ${chrome}
 bind 9:alt focus ${twitter}
 bind 0:alt focus ${vim}
 
