@@ -61,30 +61,30 @@ NeoBundle 'nanotech/jellybeans.vim'
 
 " Vim-Session {{{
 NeoBundle 'xolox/vim-misc'
-NeoBundle 'xolox/vim-session'
-let g:session_directory = "~/.vim/session"
-let g:session_autoload = "no"
-let g:session_autosave = "no"
-let g:session_command_aliases = 1
-nnoremap <leader>so :OpenSession
-nnoremap <leader>ss :SaveSession
-nnoremap <leader>sd :DeleteSession<CR>
-nnoremap <leader>sc :CloseSession<CR>
+NeoBundle 'xolox/vim-session', {
+            \   'depends' : 'xolox/vim-misc'
+            \ }
 " }}}
 
 " HTML/CSS {{{
 NeoBundle 'mattn/emmet-vim'
-NeoBundle 'slim-template/vim-slim'
+NeoBundle 'slim-template/vim-slim', {
+            \   'autoload' : { 'filetypes' : ['slim'] }
+            \ }
 " }}}
 
-NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/unite.vim', {
+            \   'autoload' : {
+            \       'commands' : [ "Unite" ]
+            \   }
+            \ }
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/vimproc', {
-  \ 'build' : {
-  \     'mac' : 'make -f make_mac.mak',
-  \     'unix' : 'make -f make_unix.mak',
-  \    },
-  \ }
+            \   'build' : {
+            \       'mac' : 'make -f make_mac.mak',
+            \       'unix' : 'make -f make_unix.mak',
+            \   }
+            \ }
 "NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'Townk/vim-autoclose'
@@ -114,38 +114,8 @@ NeoBundle 'wakatime/vim-wakatime'
 "let g:neocomplete#sources#rsense#home_directory = '/usr/local/bin/rsense'
 
 " EasyMotion {{{
-" ==============
 NeoBundle 'Lokaltog/vim-easymotion'
-let g:EasyMotion_do_mapping = 0
-" Find Motions
-nmap <Leader>f <Plug>(easymotion-s2)
-xmap <Leader>f <Plug>(easymotion-s2)
-omap <Leader>f <Plug>(easymotion-s2)
-" Turn on case sensitive feature
-let g:EasyMotion_smartcase = 1
-" Line Motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-" keep cursor column with `JK` motions
-let g:EasyMotion_startofline = 0
-" General Configuration
-let g:EasyMotion_keys = ';HKLYUIOPNM,QWERTASDGZXCVBJF'
-" Show target key with upper case to improve readability
-let g:EasyMotion_use_upper = 1
-" Jump to first match with enter & space
-let g:EasyMotion_enter_jump_first = 1
-let g:EasyMotion_space_jump_first = 1
-" Search Motions
-" Extend search motions with vital-over command line interface
-" Incremental highlight of all the matches
-" Now, you don't need to repetitively press `n` or `N` with EasyMotion feature
-" `<Tab>` & `<S-Tab>` to scroll up/down a page with next match
-" :h easymotion-command-line
-nmap g/ <Plug>(easymotion-sn)
-xmap g/ <Plug>(easymotion-sn)
-omap g/ <Plug>(easymotion-tn)
 " }}}
-
 
 " NeoBundle END }}}
 call neobundle#end()
@@ -160,6 +130,75 @@ set t_Co=256
 colorscheme molokai
 "colorscheme jellybeans
 "colorscheme vividchalk 
+
+" ============================================================================
+"  PLUGIN SETTINGS
+
+" Vim-Session {{{
+"let s:bundle = neobundle#get("vim-session")
+"function! s:bundle.hooks.on_source(bundle)
+  let g:session_directory = "~/.vim/session"
+  let g:session_autoload = 'yes'
+  let g:session_autosave = 'yes'
+  let g:session_command_aliases = 1
+"endfunction
+"unlet s:bundle
+
+nnoremap <leader>so :OpenSession
+nnoremap <leader>ss :SaveSession
+nnoremap <leader>sd :DeleteSession<CR>
+nnoremap <leader>sc :CloseSession<CR>
+" }}}
+
+" Unite {{{
+"let s:bundle = neobundle#get("unite.vim")
+"function! s:bundle.hooks.on_source(bundle)
+  let g:unite_enable_start_insert=1
+  let g:unite_source_history_yank_enable =1
+  let g:unite_source_file_mru_limit = 200
+  call unite#custom_default_action('file', 'tabopen')
+"endfunction
+"unlet s:bundle
+
+nnoremap <silent> <space>uf :Unite<space>file_rec<CR>
+nnoremap <silent> <space>ur :Unite<space>neomru/file<CR>
+" }}}
+
+" EasyMotion {{{
+let s:bundle = neobundle#get("vim-easymotion")
+function! s:bundle.hooks.on_source(bundle)
+  let g:EasyMotion_do_mapping = 0
+  " Turn on case sensitive feature
+  let g:EasyMotion_smartcase = 1
+  " keep cursor column with `JK` motions
+  let g:EasyMotion_startofline = 0
+  " General Configuration
+  let g:EasyMotion_keys = ';HKLYUIOPNM,QWERTASDGZXCVBJF'
+  " Show target key with upper case to improve readability
+  let g:EasyMotion_use_upper = 1
+  " Jump to first match with enter & space
+  let g:EasyMotion_enter_jump_first = 1
+  let g:EasyMotion_space_jump_first = 1
+endfunction
+unlet s:bundle
+
+" Find Motions
+nmap <Leader>f <Plug>(easymotion-s2)
+xmap <Leader>f <Plug>(easymotion-s2)
+omap <Leader>f <Plug>(easymotion-s2)
+" Line Motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+" Search Motions
+" Extend search motions with vital-over command line interface
+" Incremental highlight of all the matches
+" Now, you don't need to repetitively press `n` or `N` with EasyMotion feature
+" `<Tab>` & `<S-Tab>` to scroll up/down a page with next match
+" :h easymotion-command-line
+nmap g/ <Plug>(easymotion-sn)
+xmap g/ <Plug>(easymotion-sn)
+omap g/ <Plug>(easymotion-tn)
+" }}}
 
 " ============================================================================
 "  BASIC SETUP
@@ -193,6 +232,8 @@ set nobackup
 "set nowritebackup
 set noswapfile
 
+set tags=tags;
+
 " EOL
 "set nofixeol
 
@@ -209,7 +250,8 @@ set guicursor=a:blinkon0
 
 set colorcolumn=80
 set history=100
-set list
+"set list
+set nolist
 if s:is_mac
   set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
 end
@@ -251,9 +293,21 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
+nnoremap <silent> <space>lcd :lcd<space>%:h<CR>
+nnoremap <silent> <space>cd :cd<space>%:h<CR>
+
+nnoremap <space>h ^
+nnoremap <space>H $
+
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
+nnoremap <space>rep :%s///g<left><left>
+nmap / /\v
+
+nnoremap <space>rr :w<cr>:!ruby %<cr>
+
+nnoremap <space>t :tabnew<cr>
 
 "inoremap <C-r>r <ESC>:QuickRun<CR>i<Right>
 
