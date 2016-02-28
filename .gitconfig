@@ -11,3 +11,5 @@
 	st = status
 	br = branch
 	co = commit
+[push]
+	default = matching
