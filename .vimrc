@@ -455,6 +455,10 @@ endif
   
   " Don't use Ex mode, use Q for formatting
   map Q gq
+
+  inoremap ;;now  <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
+  inoremap ;;day  <c-r>=strftime("%Y-%m-%d")<cr>
+  inoremap ;;time <c-r>=strftime("%H:%M:%S")<cr>
   
   " Show diff between current buffer and before editing
   if !exists(":DiffOrig")
