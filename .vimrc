@@ -28,8 +28,12 @@ endif
 
   if s:is_windows
     let $DOTVIM = expand('~/vimfiles')
+    let $VIMRC  = expand('~/vimfiles/vimrc')
+    let $GVIMRC = expand('~/vimfiles/gvimrc')
   else
     let $DOTVIM = expand('~/.vim')
+    let $VIMRC  = expand('~/.vimrc')
+    let $GVIMRC = expand('~/.gvimrc')
   endif
   let $VIMBUNDLE = $DOTVIM . '/bundle'
   let $NEOBUNDLEPATH = $VIMBUNDLE . '/neobundle.vim'
@@ -104,9 +108,9 @@ endif
   NeoBundle 'Shougo/neco-syntax'
   NeoBundle 'Townk/vim-autoclose'
   NeoBundle 'xolox/vim-misc'
-  NeoBundle 'xolox/vim-session', {
-          \   'depends' : 'xolox/vim-misc'
-          \ }
+  "NeoBundle 'xolox/vim-session', {
+  "        \   'depends' : 'xolox/vim-misc'
+  "        \ }
   NeoBundle 'Shougo/neocomplete.vim'
   "NeoBundleLazy 'supermomonga/neocomplete-rsense.vim', { 
   "            \   'autoload' : {
@@ -127,10 +131,20 @@ endif
               \     'mappings' : '<Plug>(easymotion-' 
               \   }
               \ }
+  NeoBundleLazy 'vim-scripts/renamer.vim', {
+              \   'autoload' : {
+              \     'commands' : 'Renamer'
+              \   }
+              \ }
+  NeoBundleLazy 'junegunn/vim-easy-align', {
+              \   'autoload' : {
+              \     'mappings' : '<Plug>(EasyAlign)' 
+              \   }
+              \ }
   "NeoBundle 'vim-scripts/dbext.vim'
   "NeoBundle 'Kuniwak/vint'
 
-" NeoBundle ENj }}}
+" NeoBundle END }}}
 
   call neobundle#end()
   filetype plugin indent on
@@ -150,7 +164,7 @@ endif
        \ })
     "let s:bundle = neobundle#get("vim-session")
     "function! s:bundle.hooks.on_source(bundle)
-      let g:session_directory = "~/.vim/session"
+      let g:session_directory = $DOTVIM . '/session'
       let g:session_autoload = 'yes'
       let g:session_autosave = 'yes'
       let g:session_command_aliases = 1
@@ -228,14 +242,14 @@ endif
     let g:neocomplete#force_omni_input_patterns.typescript = '[^. \t]\.\%(\h\w*\)\?' " Same as JavaScript
     let g:neocomplete#force_omni_input_patterns.go = '[^. \t]\.\%(\h\w*\)\?'         " Same as JavaScript
 
-    let s:neco_dicts_dir = $HOME . '/.vim/dicts'
+    let s:neco_dicts_dir = $DOTVIM . '/dicts'
     if isdirectory(s:neco_dicts_dir)
       let g:neocomplete#sources#dictionary#dictionaries = {
       \   'ruby': s:neco_dicts_dir . '/ruby.dict',
       \   'javascript': s:neco_dicts_dir . '/jquery.dict',
       \ }
     endif
-    let g:neocomplete#data_directory = $HOME . '/.vim/cache/neocomplete'
+    let g:neocomplete#data_directory = $DOTVIM . '/cache/neocomplete'
 
     call neocomplete#custom#source('look', 'min_pattern_length', 1)
 
@@ -339,6 +353,16 @@ endif
     call neobundle#untap()
   end
 
+" vim-easy-align
+
+  if neobundle#tap('vim-easy-align')
+    " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+    vmap <Enter> <Plug>(EasyAlign)
+    " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+    nmap ga <Plug>(EasyAlign)
+
+    call neobundle#untap()
+  end
 
 " ============================================================================
 "  COLOR SCHEME
@@ -357,7 +381,7 @@ endif
   set fileencoding=utf-8
   set fileencodings=utf-8
   set bomb
-  set binary
+  "set binary
   set ttyfast
 
   " allow backspacing over everything in insert mode
@@ -426,7 +450,7 @@ endif
 " ============================================================================
 "  KEY MAPPING
 
-  nnoremap <space>, :tabnew<space>~/.vimrc<cr>
+  nnoremap <space>, :tabnew<space>$VIMRC<cr>
   inoremap jj <ESC>
   nnoremap s <c-w>
   nnoremap <space>t :tabnew<cr>
