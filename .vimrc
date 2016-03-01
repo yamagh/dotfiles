@@ -141,8 +141,14 @@ endif
               \     'mappings' : '<Plug>(EasyAlign)' 
               \   }
               \ }
-  "NeoBundle 'vim-scripts/dbext.vim'
+  NeoBundle 'vim-scripts/dbext.vim', {
+              \   'autoload' : { 
+              \     'filetypes' : ['sql'],
+              \     'commands' : '<Plug>(DB'
+              \   }
+              \ }
   "NeoBundle 'Kuniwak/vint'
+  NeoBundle 'vim-scripts/AnsiEsc.vim'
 
 " NeoBundle END }}}
 
@@ -219,7 +225,7 @@ endif
     let g:neocomplete#auto_completion_start_length = 2
     " preview window を閉じない
     let g:neocomplete#enable_auto_close_preview = 0
-    AutoCmd InsertLeave * silent! pclose!
+    autocmd InsertLeave * silent! pclose!
 
     let g:neocomplete#max_keyword_width = 10000
 
@@ -364,6 +370,12 @@ endif
     call neobundle#untap()
   end
 
+" dbext.vim
+
+  if neobundle#tap('dbext.vim')
+    call neobundle#untap()
+  end
+
 " ============================================================================
 "  COLOR SCHEME
 
@@ -483,6 +495,10 @@ endif
   inoremap ;;now  <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
   inoremap ;;day  <c-r>=strftime("%Y-%m-%d")<cr>
   inoremap ;;time <c-r>=strftime("%H:%M:%S")<cr>
+
+  nnoremap <space>[ :cprevious<cr>
+  nnoremap <space>] :cnext<cr>
+  autocmd QuickFixCmdPost *grep* cwindow
   
   " Show diff between current buffer and before editing
   if !exists(":DiffOrig")
