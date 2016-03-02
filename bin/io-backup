@@ -1,6 +1,6 @@
 #!/bin/sh
-FROM=/Volumes/IO-Drive/
-TO=/Volumes/Q-Drive/IO-Drive
+FROM=/Volumes/S1Drive/
+TO=/Volumes/Q-Drive/S1Drive
 echo FROM : $FROM
 echo TO   : $TO
 rsync -av --delete $FROM $TO
