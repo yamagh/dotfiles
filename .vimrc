@@ -1,4 +1,3 @@
-"scriptencoding utf8
 
 if has('vim_starting')
   " Use Vim settings
@@ -149,6 +148,11 @@ endif
               \ }
   "NeoBundle 'Kuniwak/vint'
   NeoBundle 'vim-scripts/AnsiEsc.vim'
+  NeoBundleLazy 'glidenote/memolist.vim', {
+              \   'autoload' : {
+              \     'commands' : ['MemoList', 'MemoNew', 'MemoGrep']
+              \   }
+              \ }
 
 " NeoBundle END }}}
 
@@ -168,14 +172,14 @@ endif
        \     'commands' : ['OpenSession', 'SaveSession', 'DeleteSession, CloseSession']
        \   }
        \ })
-    "let s:bundle = neobundle#get("vim-session")
-    "function! s:bundle.hooks.on_source(bundle)
+    let s:bundle = neobundle#get("vim-session")
+    function! s:bundle.hooks.on_source(bundle)
       let g:session_directory = $DOTVIM . '/session'
-      let g:session_autoload = 'yes'
-      let g:session_autosave = 'yes'
+      let g:session_autoload = 'no'
+      let g:session_autosave = 'no'
       let g:session_command_aliases = 1
-    "endfunction
-    "unlet s:bundle
+    endfunction
+    unlet s:bundle
   
     nnoremap <leader>so :OpenSession
     nnoremap <leader>ss :SaveSession
@@ -376,6 +380,26 @@ endif
     call neobundle#untap()
   end
 
+" memolist.vim
+
+  if neobundle#tap('memolist.vim')
+    let g:memolist_memo_suffix = "md"
+    let g:memolist_memo_date = "%Y-%m-%d %H:%M"
+    "let g:memolist_memo_date = "epoch"
+    "let g:memolist_memo_date = "%D %T"
+    let g:memolist_prompt_tags = 0
+    let g:memolist_prompt_categories = 0
+    "let g:memolist_qfixgrep = 1
+    "let g:memolist_vimfiler = 1
+    let g:memolist_path = "~/GoogleDrive/Memo"
+    "let g:memolist_template_dir_path = "~/GoogleDrive/Memo/"
+    map <space>mn  :MemoNew<cr>
+    map <space>ml  :MemoList<cr>
+    map <space>mg  :MemoGrep<cr>
+
+    call neobundle#untap()
+  end
+
 " ============================================================================
 "  COLOR SCHEME
 
@@ -390,11 +414,11 @@ endif
 
   " Encoding
   set encoding=utf-8
-  set fileencoding=utf-8
-  set fileencodings=utf-8
-  set bomb
+  "set fileencoding=utf-8
+  set fileencodings=iso-2022-jp,cp932,sjis,euc-jp,utf-8
+  "set bomb
   "set binary
-  set ttyfast
+  "set ttyfast
 
   " allow backspacing over everything in insert mode
   set backspace=indent,eol,start
@@ -449,6 +473,7 @@ endif
   set mousehide
   set laststatus=2
   set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l/%L,%c%V%8P
+  set foldmethod=indent
   
   if has('mouse')
     set mouse=a
