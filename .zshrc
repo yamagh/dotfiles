@@ -73,7 +73,7 @@ plugins=(git zsh-bundle-exec bundler emoji-clock zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+# User configuration ##########################################################
 
 export PATH=~/bin
 export PATH=$PATH":/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:"
@@ -108,7 +108,16 @@ zshaddhistory() {
 	]]
 }
 
-alias ojy="python ~/dev/github/OnlineJudgeHelper/oj.py --yukicoder"
+# Java ########################################################################
+
+jr() {
+  javac $1 && java `basename \$1 .java`
+}
+
+# OnlineJudgeHelper ###########################################################
+
+alias oj="python ~/GoogleDrive/MBA/app/OnlineJudgeHelper/oj.py"
+alias ojy="oj --yukicoder"
 
 # todo.txt ####################################################################
 
