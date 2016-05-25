@@ -24,8 +24,8 @@ endif
 
   if s:is_windows
     let $DOTVIM = expand('~/vimfiles')
-    let $VIMRC  = expand('~/vimfiles/vimrc')
-    let $GVIMRC = expand('~/vimfiles/gvimrc')
+    let $VIMRC  = expand('~/_vimrc')
+    let $GVIMRC = expand('~/_gvimrc')
   else
     let $DOTVIM = expand('~/.vim')
     let $VIMRC  = expand('~/.vimrc')
@@ -41,21 +41,24 @@ endif
 
   if s:is_mac
     let s:cache_home    = expand('~/.cache')
+    let s:dein_dir      = s:cache_home . '/dein'
+    let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
   elseif s:is_windows
-    let s:cache_home    = expand('~/_cache')
+    let s:cache_home    = expand('~\_cache')
+    let s:dein_dir      = s:cache_home . '\dein'
+    let s:dein_repo_dir = s:dein_dir . '\repos\github.com\Shougo\dein.vim'
   else
     let s:cache_home    = expand('~/.cache')
+    let s:dein_dir      = s:cache_home . '/dein'
+    let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
   endif
-
-  let s:dein_dir      = s:cache_home . '/dein'
-  let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
 " TOML file path
 
   if s:is_mac
   	let s:dein_toml = '~/.dein.toml'
   elseif s:is_windows
-  	let s:dein_toml = '~/_dein.toml'
+  	let s:dein_toml = '~\_dein.toml'
   else
   	let s:dein_toml = '~/.dein.toml'
   endif
@@ -66,12 +69,23 @@ endif
     if !isdirectory(s:dein_repo_dir)
       execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
     endif
-    execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
+    if s:is_mac
+      execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
+    elseif s:is_windows
+      set runtimepath^=~\_cache\dein\repos\github.com\Shougo\dein.vim
+     "set runtimepath^=~\_cache\dein\repos\github.com\Shougo\dein.vim\
+     "                                                               ~this \ is NG
+     " if execute `fnamemodify(s:dein_repo_dir, ':p')` then,
+     " returned path is '~\_cache\dein\repos\github.com\Shougo\dein.vim\'
+     "                                                                 ~
+    else
+      execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
+    endif
   endif
-  
+
 " Load TOML
 
-  if dein#load_state(s:dein_dir)
+  if dein#load_state(expand(s:dein_dir))
     call dein#begin(s:dein_dir, [$MYVIMRC, s:dein_toml])
     call dein#load_toml(s:dein_toml)
     call dein#end()
@@ -190,6 +204,7 @@ endif
   nnoremap <space>e $
   vnoremap <space>e $
 
+  nnoremap <space>w <c-w>
   nnoremap <c-h> <c-w>h
   nnoremap <c-j> <c-w>j
   nnoremap <c-k> <c-w>k
