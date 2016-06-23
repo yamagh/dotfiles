@@ -106,7 +106,9 @@ endif
   set clipboard =unnamed,autoselect
   set history   =100
   set tags      =tags;
-  set viminfo   =
+  set viminfo   ='1000,f1,:20,/10,%100
+  set iminsert  =0
+  set imsearch  =-1
 
   if has('mouse')
     set mouse=a
@@ -139,6 +141,7 @@ endif
   set incsearch
   set ignorecase
   set smartcase
+  set magic
 
   " Search and jump then movo to center
   nnoremap n nzz
@@ -175,7 +178,7 @@ endif
   syntax on
 
   set guicursor=a:blinkon0
-  set colorcolumn=80
+  set colorcolumn=0
   set laststatus =2
   set mousehide
   set number
@@ -185,6 +188,8 @@ endif
   set statusline =%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l/%L,%c%V%8P
   set t_Co       =256
   set nolist
+  set cursorline
+  hi clear CursorLine
   if s:is_mac
     set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
   end
@@ -198,6 +203,7 @@ endif
   nnoremap <space>, :e $MYVIMRC<cr>
 
   inoremap jj <ESC>
+  inoremap <ESC> <ESC>:set iminsert=0<cr>
 
   nnoremap <space>a ^
   vnoremap <space>a ^
@@ -218,13 +224,14 @@ endif
   nnoremap <space>cd :cd %:h<cr>
   nnoremap <space>lcd :cd %:h<cr>
 
-  nnoremap <space>wv <c-w>v
-  nnoremap <space>ws <c-w>s
+  nnoremap / /\v
+  nnoremap <space>rep :%s///g<left><left>
 
   inoremap ;;now  <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
   inoremap ;;day  <c-r>=strftime("%Y-%m-%d")<cr>
   inoremap ;;time <c-r>=strftime("%H:%M:%S")<cr>
 
+  nnoremap <space>rb :w<cr>:!ruby %<cr>
 
 " ============================================================================
 "  SETTINGS FOR Windows
@@ -266,4 +273,4 @@ endif
   endif
 
 
-" vim: set ft=vim tabstop=2 :
+" vim:ft=vim ts=2:

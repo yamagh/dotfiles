@@ -131,3 +131,20 @@ hook_add = '''
     nnoremap <space>mg  :MemoGrep<CR>
 '''
 
+[[plugins]]
+repo     = 'wakatime/vim-wakatime'
+
+[[plugins]]
+repo     = 'thinca/vim-quickrun'
+on_cmd   = ['QuickRun']
+hook_add = '''
+    nnoremap <space>run :QuickRun<cr>
+'''
+
+[[plugins]]
+repo     = 'vim-scripts/csharp.vim'
+on_ft    = ['cs']
+hook_add = '''
+    nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
+'''
+
