@@ -109,6 +109,7 @@ endif
   set viminfo   ='1000,f1,:20,/10,%100
   set iminsert  =0
   set imsearch  =-1
+  set wildmode  =longest:full,full
 
   if has('mouse')
     set mouse=a
