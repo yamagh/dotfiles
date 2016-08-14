@@ -219,11 +219,11 @@ endif
 
   nnoremap <space>t :tabnew<cr>
 
-  nnoremap <space>[ :cprevious<cr>
-  nnoremap <space>] :cnext<cr>
+  nnoremap <space>[ :cprevious<cr>zO
+  nnoremap <space>] :cnext<cr>zO
 
   nnoremap <space>cd :cd %:h<cr>
-  nnoremap <space>lcd :cd %:h<cr>
+  nnoremap <space>lcd :lcd %:h<cr>
 
   nnoremap / /\v
   nnoremap <space>rep :%s///g<left><left>
@@ -233,6 +233,19 @@ endif
   inoremap ;;time <c-r>=strftime("%H:%M:%S")<cr>
 
   nnoremap <space>rb :w<cr>:!ruby %<cr>
+
+
+" ============================================================================
+"  QuickFix
+"
+  set errorformat=%f\|%l\ col\ %c\|\ %m
+
+
+" ============================================================================
+"  SetFileType
+"
+  au BufNewFile,BufRead *.mdl,*.frm setf vb
+
 
 " ============================================================================
 "  SETTINGS FOR Windows

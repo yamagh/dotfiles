@@ -122,9 +122,11 @@ repo     = 'glidenote/memolist.vim'
 on_cmd   = ['MemoNew','MemoList','MemoGrep']
 hook_add = '''
     let g:memolist_path = "~/GoogleDrive/Memo"
-    let g:memolist_unite = 1
+    let g:memolist_memo_suffix = "md"
+    let g:memolist_filename_prefix_none = 1
+    let g:memolist_unite = 0
     let g:memolist_unite_source = "file_rec"
-    let g:memolist_unite_option = "-auto-preview -start-insert"
+    let g:memolist_unite_option = "-start-insert"
     "let g:memolist_template_dir_path = "~/GoogleDrive/Memo/templates"
     nnoremap <space>mn  :MemoNew<CR>
     nnoremap <space>ml  :MemoList<CR>
@@ -138,7 +140,10 @@ repo     = 'wakatime/vim-wakatime'
 repo     = 'thinca/vim-quickrun'
 on_cmd   = ['QuickRun']
 hook_add = '''
-    nnoremap <space>run :QuickRun<cr>
+    nnoremap <space>run  :QuickRun<cr>
+    nnoremap <space>rin1 :QuickRun -input in.1<cr>
+    nnoremap <space>rin2 :QuickRun -input in.2<cr>
+    nnoremap <space>rin3 :QuickRun -input in.3<cr>
 '''
 
 [[plugins]]
@@ -174,4 +179,7 @@ hook_add = '''
     command Tall  :Unite todo
     command Ta    :UniteTodoAddSimple
 '''
+
+[[plugins]]
+repo     = 'vim-scripts/tetris.vim'
 
