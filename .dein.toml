@@ -27,22 +27,29 @@ hook_post_source = '''
 repo      = 'Shougo/neomru.vim'
 on_source = ['unite.vim']
 
-#[[plugins]]
-#repo = 'neocomplete.vim'
+[[plugins]]
+repo = 'Shougo/neocomplete.vim'
+
+[[plugins]]
+repo = 'Shougo/neocomplcache.vim'
 
 [[plugins]]
 repo     = 'Shougo/neosnippet'
 hook_add = '''
     if has('mac')
-      let g:neosnippet#snippets_directory = '~/GoogleDrive/snippets'
+      let g:neosnippet#snippets_directory = '~/GoogleDrive/vim/snippets'
     elseif has('win16') || has('win32') || has('win64')
-      let g:neosnippet#snippets_directory = '~/GoogleDrive/snippets'
+      let g:neosnippet#snippets_directory = '~/GoogleDrive/vim/snippets'
     else
-      let g:neosnippet#snippets_directory = '~/snippets'
+      let g:neosnippet#snippets_directory = '~/snippets/vim'
     endif
     "if !isdirectory(g:neosnippet#snippets_directory)
     "  call mkdir(iconv(g:neosnippet#snippets_directory, &encoding, &termencoding), 'p')
     "endif
+
+    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    xmap <C-k>     <Plug>(neosnippet_expand_target)
 '''
 
 [[plugins]]
@@ -124,7 +131,7 @@ hook_add = '''
     let g:memolist_path = "~/GoogleDrive/Memo"
     let g:memolist_memo_suffix = "md"
     let g:memolist_filename_prefix_none = 1
-    let g:memolist_unite = 0
+    let g:memolist_unite = 1
     let g:memolist_unite_source = "file_rec"
     let g:memolist_unite_option = "-start-insert"
     "let g:memolist_template_dir_path = "~/GoogleDrive/Memo/templates"
@@ -141,9 +148,12 @@ repo     = 'thinca/vim-quickrun'
 on_cmd   = ['QuickRun']
 hook_add = '''
     nnoremap <space>run  :QuickRun<cr>
+    nnoremap <space>rin0 :QuickRun -input in.0<cr>
     nnoremap <space>rin1 :QuickRun -input in.1<cr>
     nnoremap <space>rin2 :QuickRun -input in.2<cr>
     nnoremap <space>rin3 :QuickRun -input in.3<cr>
+    nnoremap <space>rin4 :QuickRun -input in.4<cr>
+    nnoremap <space>rin5 :QuickRun -input in.5<cr>
 '''
 
 [[plugins]]
@@ -182,4 +192,11 @@ hook_add = '''
 
 [[plugins]]
 repo     = 'vim-scripts/tetris.vim'
+
+[[plugins]]
+repo     = 'slim-template/vim-slim'
+on_ft    = ['slim']
+hook_add = '''
+    autocmd BufNewFile,BufRead *.slim setlocal filetype=slim
+'''
 

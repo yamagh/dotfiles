@@ -109,7 +109,9 @@ endif
   set viminfo   ='1000,f1,:20,/10,%100
   set iminsert  =0
   set imsearch  =-1
+  set imdisable
   set wildmode  =longest:full,full
+  set nohidden
 
   if has('mouse')
     set mouse=a
@@ -229,10 +231,15 @@ endif
   nnoremap <space>rep :%s///g<left><left>
 
   inoremap ;;now  <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
-  inoremap ;;day  <c-r>=strftime("%Y-%m-%d")<cr>
+  cnoremap ;;now  <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
+  inoremap ;;date <c-r>=strftime("%Y-%m-%d")<cr>
+  cnoremap ;;date <c-r>=strftime("%Y-%m-%d")<cr>
   inoremap ;;time <c-r>=strftime("%H:%M:%S")<cr>
+  cnoremap ;;time <c-r>=strftime("%H:%M:%S")<cr>
 
   nnoremap <space>rb :w<cr>:!ruby %<cr>
+
+  cnoremap ;;blog cd ~/GoogleDrive/dev/github/yamagh.github.io/
 
 
 " ============================================================================
