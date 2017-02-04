@@ -37,9 +37,9 @@ repo = 'Shougo/neocomplcache.vim'
 repo     = 'Shougo/neosnippet'
 hook_add = '''
     if has('mac')
-      let g:neosnippet#snippets_directory = '~/GoogleDrive/vim/snippets'
+      let g:neosnippet#snippets_directory = '~/GoogleDrive/snippets/vim'
     elseif has('win16') || has('win32') || has('win64')
-      let g:neosnippet#snippets_directory = '~/GoogleDrive/vim/snippets'
+      let g:neosnippet#snippets_directory = '~/GoogleDrive/snippets/vim'
     else
       let g:neosnippet#snippets_directory = '~/snippets/vim'
     endif
@@ -198,5 +198,14 @@ repo     = 'slim-template/vim-slim'
 on_ft    = ['slim']
 hook_add = '''
     autocmd BufNewFile,BufRead *.slim setlocal filetype=slim
+'''
+
+[[plugins]]
+repo     = 'open-browser.vim'
+on_ft    = ['md', 'markdown']
+hook_add = '''
+    let g:netrw_nogx = 1 " disable netrw's gx mapping.
+    nmap gx <Plug>(openbrowser-smart-search)
+    vmap gx <Plug>(openbrowser-smart-search)
 '''
 
