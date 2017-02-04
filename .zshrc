@@ -81,6 +81,17 @@
   #export PATH=./vendor/bin:$PATH
 
 ###############################################################################
+# tmux
+
+  if [ -z $TMUX ]; then
+    if $(tmux has-session 2> /dev/null); then
+      tmux -2 attach && exit
+    else
+      tmux -2 && exit
+    fi
+  fi
+
+###############################################################################
 # OTHER
 
   zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
@@ -120,9 +131,9 @@
 
 # anyframe
 
-  alias aa="anyframe-widget-select-widget"
-  alias acd="anyframe-widget-cdr"
-  alias ahi="anyframe-widget-put-history"
-  alias ahe="anyframe-widget-execute-history"
-  alias ag="anyframe-widget-cd-ghq-repository"
+  alias af="anyframe-widget-select-widget"
+  alias cdh="anyframe-widget-cdr"
+  alias cdg="anyframe-widget-cd-ghq-repository"
+  alias hi="anyframe-widget-put-history"
+  alias he="anyframe-widget-execute-history"
 
