@@ -5,7 +5,7 @@
     eval `/usr/libexec/path_helper -s`
   fi
 
-  export PATH=$HOME/bin
+  export PATH=$HOME/bin:$PATH
   export PATH=$PATH":/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:"
   export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
   export PATH=$HOME/.cabal/bin:$PATH
