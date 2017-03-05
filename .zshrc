@@ -85,9 +85,15 @@
 
   if [ -z $TMUX ]; then
     if $(tmux has-session 2> /dev/null); then
-      tmux -2 attach && exit
+      printf 'Attach tmux? [y/N]: '
+      if read -q; then
+        tmux -2 attach && exit
+      fi
     else
-      tmux -2 && exit
+      printf 'Run tmux? [y/N]: '
+      if read -q; then
+        tmux -2 && exit
+      fi
     fi
   fi
 
@@ -96,7 +102,6 @@
 
   zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
-###############################################################################
 # zplug
 
   source $HOME/.zplug/init.zsh
@@ -136,4 +141,9 @@
   alias cdg="anyframe-widget-cd-ghq-repository"
   alias hi="anyframe-widget-put-history"
   alias he="anyframe-widget-execute-history"
+
+# zsh-autosuggestions
+
+  bindkey '^f' autosuggest-accept
+  bindkey '^e' autosuggest-execute
 
