@@ -59,6 +59,20 @@
   zstyle ':chpwd:*' recent-dirs-pushd true
 
 ###############################################################################
+# Git
+
+  alias ga="git add"
+  alias gc="git commit"
+  alias gs="git status"
+  alias gb="git branch"
+  alias gl="git log"
+
+###############################################################################
+# Rails
+
+  alias br="bin/rails"
+
+###############################################################################
 # todo.txt
 
   # `t` option is prepend the current date to a task automatically
