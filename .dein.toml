@@ -16,11 +16,32 @@ hook_add = '''
   let g:unite_enable_start_insert        = 1
   let g:unite_source_history_yank_enable = 1
   let g:unite_source_file_mru_limit      = 200
+  let g:unite_source_grep_default_opts   = '--ignore ''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'' --ignore ''vendor'' '
   nnoremap <silent> <space>uf :Unite<space>file_rec<CR>
   nnoremap <silent> <space>ur :Unite<space>neomru/file<CR>
 '''
 hook_post_source = '''
   call unite#custom_default_action('file', 'tabopen')
+
+  " .gitignoreで指定したファイルと.git/以下のファイルを候補から除外する
+  function! s:unite_gitignore_source()
+    let sources = []
+    if filereadable('./.gitignore')
+      for file in readfile('./.gitignore')
+        " コメント行と空行は追加しない
+        if file !~ "^#\\|^\s\*$"
+          call add(sources, file)
+        endif
+      endfor
+    endif
+    if isdirectory('./.git')
+      call add(sources, '.git')
+    endif
+    let pattern = escape(join(sources, '|'), './|')
+    call unite#custom#source('file_rec', 'ignore_pattern', pattern)
+    call unite#custom#source('grep', 'ignore_pattern', pattern)
+  endfunction
+  call s:unite_gitignore_source()
 '''
 
 [[plugins]]
@@ -62,6 +83,7 @@ repo = 'Shougo/context_filetype.vim'
 [[plugins]]
 repo    = 'osyo-manga/vim-precious'
 depends = ['context_filetype.vim']
+on_ft = ['toml','vim']
 
 [[plugins]]
 repo = 'Townk/vim-autoclose'
@@ -112,17 +134,17 @@ repo   = 'vim-scripts/dbext.vim'
 on_ft  = ['sql']
 on_cmd = ['<Plug>(DB']
 
-[[plugins]]
-repo     = 'nathanaelkane/vim-indent-guides'
-hook_add = '''
-    let g:indent_guides_enable_on_vim_startup=1
-    let g:indent_guides_start_level=2
-    let g:indent_guides_auto_colors=0
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#444433 ctermbg=black
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#333344 ctermbg=darkgray
-    let g:indent_guides_color_change_percent = 30
-    let g:indent_guides_guide_size = 1
-'''
+#[[plugins]]
+#repo     = 'nathanaelkane/vim-indent-guides'
+#hook_add = '''
+#    let g:indent_guides_enable_on_vim_startup=1
+#    let g:indent_guides_start_level=2
+#    let g:indent_guides_auto_colors=0
+#    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#444433 ctermbg=black
+#    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#333344 ctermbg=darkgray
+#    let g:indent_guides_color_change_percent = 30
+#    let g:indent_guides_guide_size = 1
+#'''
 
 [[plugins]]
 repo     = 'glidenote/memolist.vim'
@@ -207,5 +229,24 @@ hook_add = '''
     let g:netrw_nogx = 1 " disable netrw's gx mapping.
     nmap gx <Plug>(openbrowser-smart-search)
     vmap gx <Plug>(openbrowser-smart-search)
+'''
+
+[[plugins]]
+repo     = 'terryma/vim-multiple-cursors'
+
+[[plugins]]
+repo     = 'lambdalisue/vim-gista'
+on_cmd   = 'Gista'
+hook_add = '''
+    let g:gista#client#default_username = 'yamagh'
+'''
+
+[[plugins]]
+repo      = 'lambdalisue/vim-gista-unite'
+on_source = 'unite.vim'
+on_cmd    = 'Gista'
+depends   = 'vim-gista'
+hook_add  = '''
+  nnoremap <silent> <space>ug :Unite<space>gista<CR>
 '''
 
