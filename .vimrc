@@ -131,8 +131,13 @@ endif
 " Encoding
 
   set encoding      =utf-8
+  if s:is_mac
+    set fileencodings =utf-8,iso-2022-jp,euc-jp,cp932,sjis,utf16le
+  elseif s:is_windows
+    set fileencodings =iso-2022-jp,euc-jp,utf-8,cp932,sjis,utf16le
+  endif
   "set fileencoding  =utf-8
-  set fileencodings =iso-2022-jp,euc-jp,utf-8,cp932,sjis,utf16le
+  "set fileencodings =iso-2022-jp,euc-jp,utf-8,cp932,sjis,utf16le
   "set fileencodings =iso-2022-jp,cp932,sjis,euc-jp,utf-16le,utf-8
   "set bomb
   "set binary
@@ -191,7 +196,7 @@ endif
   set statusline =%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l/%L,%c%V%8P
   set t_Co       =256
   set nolist
-  set cursorline
+  set nocursorline
   hi clear CursorLine
   if s:is_mac
     set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
@@ -242,6 +247,11 @@ endif
   cnoremap ;;blog cd ~/GoogleDrive/dev/yamagh.github.io/
   inoremap ;;img ![img]()<esc>Pa=w740
   "inoremap ;;img ![img]()<esc>P :s/=w\d\{1,4\}-h\d\{1,4\}-no/=w740/<cr>
+
+
+" ============================================================================
+"  Functions
+"
 
 
 " ============================================================================
