@@ -80,6 +80,9 @@
   alias t="~/.ghq/github.com/ginatrapani/todo.txt-cli/todo.sh -t -d ~/.todo/todo.cfg"
   alias tp="~/.ghq/github.com/ginatrapani/todo.txt-cli/todo.sh -t -d ~/.todo/todo.cfg pom"
 
+  # For `edit` action setting
+  export EDITOR=vim
+
 ###############################################################################
 # OnlineJudgeHelper
 
