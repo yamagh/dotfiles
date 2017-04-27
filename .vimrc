@@ -102,6 +102,7 @@ endif
 " ============================================================================
 "  GENERAL SETTINGS
 "
+  set autoread
   set backspace =indent,eol,start
   set clipboard =unnamed,autoselect
   set history   =100
