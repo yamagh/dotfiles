@@ -161,7 +161,7 @@
 
   alias af="anyframe-widget-select-widget"
   alias cdh="anyframe-widget-cdr"
-  alias cdg="anyframe-widget-cd-ghq-repository"
+  alias ghl="anyframe-widget-cd-ghq-repository"
   alias hi="anyframe-widget-put-history"
   alias he="anyframe-widget-execute-history"
 
