@@ -47,16 +47,16 @@ bind down:shift;alt  nudge +0  +2%
 bind `:alt undo
 
 # Focus
-alias terminal 'ターミナル'
-alias safari   'Safari'
-alias twitter  'Twitter'
-alias vim      'MacVim'
-alias atom     'Atom'
-alias chrome   'Chrome'
+alias terminal     'ターミナル'
+alias safari       'Safari'
+alias twitter      'Twitter'
+alias vim          'MacVim'
+alias atom         'Atom'
+alias chrome       'Google Chrome'
+alias todo_txt_mac 'TodoTxtMac'
 bind 1:alt focus ${terminal}
-bind 2:alt focus ${atom}
-bind 3:alt focus ${chrome}
-bind 9:alt focus ${twitter}
+bind 8:alt focus ${todo_txt_mac}
+bind 9:alt focus ${chrome}
 bind 0:alt focus ${vim}
 
 # iTerm, Emacs, Google Chrome をぐるぐるする
