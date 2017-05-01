@@ -146,6 +146,7 @@ endif
 
 " Searching
 
+  set hls
   set nohlsearch
   set incsearch
   set ignorecase
@@ -245,7 +246,6 @@ endif
 
   nnoremap <space>rb :w<cr>:!ruby %<cr>
 
-  cnoremap ;;blog cd ~/GoogleDrive/dev/yamagh.github.io/
   inoremap ;;img ![img]()<esc>Pa=w740
   "inoremap ;;img ![img]()<esc>P :s/=w\d\{1,4\}-h\d\{1,4\}-no/=w740/<cr>
 
