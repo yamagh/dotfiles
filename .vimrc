@@ -227,6 +227,11 @@ endif
   nnoremap <c-l> <c-w>l
 
   nnoremap <space>t :tabnew<cr>
+  nnoremap <space>ee :Ex<cr>
+  nnoremap <space>he :Hex<cr>
+  nnoremap <space>ve :Vex<cr>
+  nnoremap <space>te :Tex<cr>
+  nnoremap <space>rex :Rex<cr>
 
   nnoremap <space>[ :cprevious<cr>zO
   nnoremap <space>] :cnext<cr>zO
