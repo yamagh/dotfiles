@@ -21,7 +21,7 @@ hook_add = '''
   nnoremap <silent> <space>ur :Unite<space>neomru/file<CR>
 '''
 hook_post_source = '''
-  call unite#custom_default_action('file', 'tabopen')
+  call unite#custom_default_action('file', 'open')
 
   " .gitignoreで指定したファイルと.git/以下のファイルを候補から除外する
   function! s:unite_gitignore_source()
@@ -50,6 +50,10 @@ on_source = ['unite.vim']
 
 [[plugins]]
 repo = 'Shougo/neocomplete.vim'
+hook_add = '''
+  let g:neocomplete#enable_at_startup = 1
+  let g:neocomplete#enable_smart_case = 1
+'''
 
 [[plugins]]
 repo = 'Shougo/neocomplcache.vim'
@@ -199,21 +203,21 @@ hook_add = '''
     vnoremap <space>sf :'<,'>Sqlfix<cr>
 '''
 
-[[plugins]]
-repo     = 'kannokanno/unite-todo'
-hook_add = '''
-    let g:unite_todo_data_directory ='~'
-    let g:unite_todo_note_suffix    ='txt'
-    let g:unite_todo_note_opener    ='edit'
-    command T     :Unite todo:undone
-    command Tls   :Unite todo:undone
-    command Tdone :Unite todo:done
-    command Tall  :Unite todo
-    command Ta    :UniteTodoAddSimple
-'''
+#[[plugins]]
+#repo     = 'kannokanno/unite-todo'
+#hook_add = '''
+#    let g:unite_todo_data_directory ='~'
+#    let g:unite_todo_note_suffix    ='txt'
+#    let g:unite_todo_note_opener    ='edit'
+#    command T     :Unite todo:undone
+#    command Tls   :Unite todo:undone
+#    command Tdone :Unite todo:done
+#    command Tall  :Unite todo
+#    command Ta    :UniteTodoAddSimple
+#'''
 
-[[plugins]]
-repo     = 'vim-scripts/tetris.vim'
+#[[plugins]]
+#repo     = 'vim-scripts/tetris.vim'
 
 [[plugins]]
 repo     = 'slim-template/vim-slim'
