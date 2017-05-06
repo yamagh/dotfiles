@@ -262,5 +262,10 @@ on_cmd    = ['Gstatus','Gwrite','Gread','Gcommit','Gdiff','Glog','Gmove','Gremov
 repo      = 'csexton/jekyll.vim'
 on_cmd    = ['JekyllBuild','JekyllList','JekyllPost']
 hook_add  = '''
-  let g:jekyll_path = "~/.ghq/github.com/yamagh/yamagh.github.io/"
+  let g:jekyll_post_suffix       = "md"
+  let g:jekyll_post_published    = "true"
+  " let g:jekyll_post_created      = "epoch"
+  " let g:jekyll_prompt_tags       = "true"
+  " let g:jekyll_prompt_categories = "true"
+  let g:jekyll_path              = "~/.ghq/github.com/yamagh/yamagh.github.io/"
 '''
