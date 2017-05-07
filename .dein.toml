@@ -24,24 +24,24 @@ hook_post_source = '''
   call unite#custom_default_action('file', 'open')
 
   " .gitignoreで指定したファイルと.git/以下のファイルを候補から除外する
-  function! s:unite_gitignore_source()
-    let sources = []
-    if filereadable('./.gitignore')
-      for file in readfile('./.gitignore')
-        " コメント行と空行は追加しない
-        if file !~ "^#\\|^\s\*$"
-          call add(sources, file)
-        endif
-      endfor
-    endif
-    if isdirectory('./.git')
-      call add(sources, '.git')
-    endif
-    let pattern = escape(join(sources, '|'), './|')
-    call unite#custom#source('file_rec', 'ignore_pattern', pattern)
-    call unite#custom#source('grep', 'ignore_pattern', pattern)
-  endfunction
-  call s:unite_gitignore_source()
+  "function! s:unite_gitignore_source()
+  "  let sources = []
+  "  if filereadable('./.gitignore')
+  "    for file in readfile('./.gitignore')
+  "      " コメント行と空行は追加しない
+  "      if file !~ "^#\\|^\s\*$"
+  "        call add(sources, file)
+  "      endif
+  "    endfor
+  "  endif
+  "  if isdirectory('./.git')
+  "    call add(sources, '.git')
+  "  endif
+  "  let pattern = escape(join(sources, '|'), './|')
+  "  call unite#custom#source('file_rec', 'ignore_pattern', pattern)
+  "  call unite#custom#source('grep', 'ignore_pattern', pattern)
+  "endfunction
+  "call s:unite_gitignore_source()
 '''
 
 [[plugins]]
@@ -269,3 +269,12 @@ hook_add  = '''
   " let g:jekyll_prompt_categories = "true"
   let g:jekyll_path              = "~/.ghq/github.com/yamagh/yamagh.github.io/"
 '''
+
+[[plugins]]
+repo      = 'stefanoverna/vim-i18n'
+on_ft     = ['eruby','slim','rb']
+hook_add  = '''
+  vmap <space>it :call I18nTranslateString()<CR>
+  vmap <space>id :call I18nDisplayTranslation()<CR>
+'''
+
