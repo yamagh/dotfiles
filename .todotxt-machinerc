@@ -1,0 +1,9 @@
+[settings]
+file = ~/Dropbox/Local/todo/todo.txt
+archive = ~/Dropbox/Local/todo/done.txt
+auto-save = True
+show-toolbar = False
+show-filter-panel = False
+enable-borders = False
+enable-word-wrap = True
+
