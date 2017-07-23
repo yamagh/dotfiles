@@ -47,24 +47,30 @@ bind down:shift;alt  nudge +0  +2%
 bind `:alt undo
 
 # Focus
+alias finder       'Finder'
 alias terminal     'ターミナル'
 alias safari       'Safari'
 alias twitter      'Twitter'
-alias vim          'MacVim'
+alias mvim          'MacVim'
 alias atom         'Atom'
 alias chrome       'Google Chrome'
 alias todo_txt_mac 'TodoTxtMac'
 bind 1:alt focus ${terminal}
+bind 2:alt focus ${mvim}
 bind 8:alt focus ${todo_txt_mac}
 bind 9:alt focus ${chrome}
-bind 0:alt focus ${vim}
+bind 0:alt focus ${finder}
 
-# iTerm, Emacs, Google Chrome をぐるぐるする
-layout jobLayout1 ${safari} push right ${halfx}
-layout jobLayout1 ${safari} push left ${halfx}
-layout jobLayout2 ${twitter} push left ${halfx}
-layout jobLayout2 ${terminal} push right ${halfx}
-layout jobLayout3 ${terminal} push left ${halfx}
-layout jobLayout3 ${twitter} push right ${halfx}
-bind 1:ctrl;alt	  chain sequence layout jobLayout1 > focus ${safari} > focus ${terminal} | sequence layout jobLayout2 > focus ${twitter} > focus ${safari} | sequence layout jobLayout3 > focus ${terminal} > focus ${safari}
+## iTerm, Emacs, Google Chrome をぐるぐるする
+#layout jobLayout1 ${safari} push right ${halfx}
+#layout jobLayout1 ${safari} push left ${halfx}
+#layout jobLayout2 ${twitter} push left ${halfx}
+#layout jobLayout2 ${terminal} push right ${halfx}
+#layout jobLayout3 ${terminal} push left ${halfx}
+#layout jobLayout3 ${twitter} push right ${halfx}
+#bind 1:ctrl;alt	  chain sequence layout jobLayout1 > focus ${safari} > focus ${terminal} | sequence layout jobLayout2 > focus ${twitter} > focus ${safari} | sequence layout jobLayout3 > focus ${terminal} > focus ${safari}
+
+layout L1 ${terminal} push left  ${halfx}
+layout L2 ${mvim}     push right ${halfx}
+bind 1:ctrl;alt	chain sequence layout L1 > sequence layout L2
 
