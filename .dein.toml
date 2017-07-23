@@ -167,9 +167,6 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo     = 'wakatime/vim-wakatime'
-
-[[plugins]]
 repo     = 'thinca/vim-quickrun'
 on_cmd   = ['QuickRun']
 hook_add = '''
@@ -227,7 +224,7 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo     = 'open-browser.vim'
+repo     = 'vim-scripts/open-browser.vim'
 on_ft    = ['md', 'markdown']
 hook_add = '''
     let g:netrw_nogx = 1 " disable netrw's gx mapping.
@@ -276,5 +273,12 @@ on_ft     = ['eruby','slim','rb']
 hook_add  = '''
   vmap <space>it :call I18nTranslateString()<CR>
   vmap <space>id :call I18nDisplayTranslation()<CR>
+'''
+
+[[plugins]]
+repo      = 'shougo/unite-outline'
+depends   = 'unite'
+hook_add  = '''
+  nnoremap <silent> <space>uo :Unite -no-quit -vertical -winwidth=30 outline<CR>
 '''
 
