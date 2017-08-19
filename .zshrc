@@ -78,7 +78,8 @@
 
   # `t` option is prepend the current date to a task automatically
   alias t="~/.ghq/github.com/ginatrapani/todo.txt-cli/todo.sh -t -d ~/.todo/todo.cfg"
-  alias tp="~/.ghq/github.com/ginatrapani/todo.txt-cli/todo.sh -t -d ~/.todo/todo.cfg pom"
+  alias tp="t pom"
+  alias te="t edit"
 
   # For `edit` action setting
   export EDITOR=vim
@@ -167,10 +168,10 @@
 # anyframe
 
   alias af="anyframe-widget-select-widget"
-  alias cdh="anyframe-widget-cdr"
-  alias ghl="anyframe-widget-cd-ghq-repository"
-  alias hi="anyframe-widget-put-history"
-  alias he="anyframe-widget-execute-history"
+  alias afcd="anyframe-widget-cdr"
+  alias afgh="anyframe-widget-cd-ghq-repository"
+  alias afhi="anyframe-widget-put-history"
+  alias afhe="anyframe-widget-execute-history"
 
 # zsh-autosuggestions
 
