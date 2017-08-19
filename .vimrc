@@ -242,16 +242,16 @@ endif
   nnoremap / /\v
   nnoremap <space>rep :%s///g<left><left>
 
-  inoremap ;;now  <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
-  cnoremap ;;now  <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
-  inoremap ;;date <c-r>=strftime("%Y-%m-%d")<cr>
-  cnoremap ;;date <c-r>=strftime("%Y-%m-%d")<cr>
-  inoremap ;;time <c-r>=strftime("%H:%M:%S")<cr>
-  cnoremap ;;time <c-r>=strftime("%H:%M:%S")<cr>
+  inoremap :now  <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
+  cnoremap :now  <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
+  inoremap :date <c-r>=strftime("%Y-%m-%d")<cr>
+  cnoremap :date <c-r>=strftime("%Y-%m-%d")<cr>
+  inoremap :time <c-r>=strftime("%H:%M:%S")<cr>
+  cnoremap :time <c-r>=strftime("%H:%M:%S")<cr>
 
   nnoremap <space>rb :w<cr>:!ruby %<cr>
 
-  inoremap ;;img ![img]()<esc>Pa=w740
+  inoremap :img ![img]()<esc>Pa=w740
   "inoremap ;;img ![img]()<esc>P :s/=w\d\{1,4\}-h\d\{1,4\}-no/=w740/<cr>
 
 
