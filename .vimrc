@@ -153,14 +153,6 @@ endif
   set smartcase
   set magic
 
-  " Search and jump then movo to center
-  nnoremap n nzz
-  nnoremap N Nzz
-  nnoremap * *zz
-  nnoremap # #zz
-  nnoremap g* g*zz
-  nnoremap g# g#zz
-
 " Backup, Swap, Undo files
   " Turn off all, since many files are in git
 
@@ -209,39 +201,54 @@ endif
 "  KEY MAPPING
 "
   let mapleader="\<Space>"
+  let maplocalleader="_"
 
   nnoremap <space>, :e $MYVIMRC<cr>
 
-  inoremap jj <ESC>
-  inoremap <ESC> <ESC>:set iminsert=0<cr>
-
+  " Edit
   nnoremap <space>a ^
   vnoremap <space>a ^
   nnoremap <space>e $
   vnoremap <space>e $
+  inoremap jj <ESC>
+  inoremap <ESC> <ESC>:set iminsert=0<cr>
 
+  " Window
   nnoremap <space>w <c-w>
   nnoremap <c-h> <c-w>h
   nnoremap <c-j> <c-w>j
   nnoremap <c-k> <c-w>k
   nnoremap <c-l> <c-w>l
 
+  " Tab
   nnoremap <space>t :tabnew<cr>
+
+  " Netrw
   nnoremap <space>E  :Ex<cr>
   nnoremap <space>he :Hex<cr>
   nnoremap <space>ve :Vex<cr>
   nnoremap <space>te :Tex<cr>
   nnoremap <space>rex :Rex<cr>
 
+  " QuickFix
   nnoremap <space>[ :cprevious<cr>zO
   nnoremap <space>] :cnext<cr>zO
 
+  " File
   nnoremap <space>cd :cd %:h<cr>
   nnoremap <space>lcd :lcd %:h<cr>
 
+  " Search
   nnoremap / /\v
+  nnoremap n nzz
+  nnoremap N Nzz
+  nnoremap * *zz
+  nnoremap # #zz
+  nnoremap g* g*zz
+  nnoremap g# g#zz
   nnoremap <space>rep :%s///g<left><left>
 
+  " Snippet
   inoremap :now  <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
   cnoremap :now  <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
   inoremap :date <c-r>=strftime("%Y-%m-%d")<cr>
@@ -249,8 +256,10 @@ endif
   inoremap :time <c-r>=strftime("%H:%M:%S")<cr>
   cnoremap :time <c-r>=strftime("%H:%M:%S")<cr>
 
+  " Ruby
   nnoremap <space>rb :w<cr>:!ruby %<cr>
 
+  " Blog
   inoremap :img ![img]()<esc>Pa=w740
   "inoremap ;;img ![img]()<esc>P :s/=w\d\{1,4\}-h\d\{1,4\}-no/=w740/<cr>
 
