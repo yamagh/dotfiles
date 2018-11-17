@@ -38,10 +38,17 @@
 
   export LSCOLORS=exfxcxdxbxegedabagacad
   export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-  alias ls="ls --color"
-  alias ll="ls -l --color"
-  alias la="ls -a --color"
-  alias lla="ls -la --color"
+
+  #alias ls="ls --color"
+  #alias ll="ls -l --color"
+  #alias la="ls -a --color"
+  #alias lla="ls -la --color"
+
+  alias ls="ls -G"
+  alias ll="ls -l -G"
+  alias la="ls -a -G"
+  alias lla="ls -la -G"
+
   zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
 
 ###############################################################################
@@ -87,8 +94,9 @@
 ###############################################################################
 # OnlineJudgeHelper
 
-  alias oj="python ~/GoogleDrive/MBA/app/OnlineJudgeHelper/oj.py"
-  alias ojy="oj --yukicoder"
+# alias oj="python ~/GoogleDrive/MBA/app/OnlineJudgeHelper/oj.py"
+# alias ojy="oj --yukicoder"
+  alias oj="python ~/.ghq/github.com/kmyk/online-judge-tools/oj"
 
 ###############################################################################
 # Heroku
@@ -127,6 +135,26 @@
   export PYENV_ROOT=$HOME/.pyenv
   export PATH=$PYENV_ROOT/bin:$PATH
   eval "$(pyenv init -)"
+
+###############################################################################
+# ithief
+
+  alias it="ithief"
+
+###############################################################################
+# peco
+
+function peco_mdfind_cd() {
+    cd "$(mdfind 'kMDItemContentType == "public.folder" || kMDItemFSNodeCount > 0' $1 | peco)"  
+}
+alias pmc="peco_mdfind_cd"
+
+###############################################################################
+# Util
+mkcd(){
+  mkdir $1 && cd $1
+}
+
 
 ###############################################################################
 # OTHER
@@ -170,8 +198,11 @@
   alias af="anyframe-widget-select-widget"
   alias afcd="anyframe-widget-cdr"
   alias afgh="anyframe-widget-cd-ghq-repository"
-  alias afhi="anyframe-widget-put-history"
-  alias afhe="anyframe-widget-execute-history"
+  #alias afhi="anyframe-widget-put-history"
+  #alias afhe="anyframe-widget-execute-history"
+
+  bindkey '^kc' anyframe-widget-cdr
+  bindkey '^kg' anyframe-widget-cd-ghq-repository
 
 # zsh-autosuggestions
 

@@ -201,7 +201,7 @@ endif
 "  KEY MAPPING
 "
   let mapleader="\<Space>"
-  let maplocalleader="_"
+  let maplocalleader=";"
 
   nnoremap <space>, :e $MYVIMRC<cr>
 
@@ -248,13 +248,24 @@ endif
   nnoremap g# g#zz
   nnoremap <space>rep :%s///g<left><left>
 
+  " Terminal
+  if has('nvim')
+    tnoremap <expr> <A-r> '<C-\><C-N>"'.nr2char(getchar()).'pi'
+  endif
+
   " Snippet
   inoremap :now  <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
+  inoremap ;now  <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
   cnoremap :now  <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
+  cnoremap ;now  <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
   inoremap :date <c-r>=strftime("%Y-%m-%d")<cr>
+  inoremap ;date <c-r>=strftime("%Y-%m-%d")<cr>
   cnoremap :date <c-r>=strftime("%Y-%m-%d")<cr>
+  cnoremap ;date <c-r>=strftime("%Y-%m-%d")<cr>
   inoremap :time <c-r>=strftime("%H:%M:%S")<cr>
+  inoremap ;time <c-r>=strftime("%H:%M:%S")<cr>
   cnoremap :time <c-r>=strftime("%H:%M:%S")<cr>
+  cnoremap ;time <c-r>=strftime("%H:%M:%S")<cr>
 
   " Ruby
   nnoremap <space>rb :w<cr>:!ruby %<cr>
@@ -263,6 +274,8 @@ endif
   inoremap :img ![img]()<esc>Pa=w740
   "inoremap ;;img ![img]()<esc>P :s/=w\d\{1,4\}-h\d\{1,4\}-no/=w740/<cr>
 
+  " Todo.txt
+  nnoremap <space>mt :e ~/Dropbox/todo/todo.txt<cr>
 
 " ============================================================================
 "  Functions

@@ -154,7 +154,7 @@ on_cmd = ['<Plug>(DB']
 repo     = 'glidenote/memolist.vim'
 on_cmd   = ['MemoNew','MemoList','MemoGrep']
 hook_add = '''
-    let g:memolist_path = "~/GoogleDrive/Memo"
+    let g:memolist_path = "~/Dropbox/Note"
     let g:memolist_memo_suffix = "md"
     let g:memolist_filename_prefix_none = 1
     let g:memolist_unite = 1
@@ -281,4 +281,7 @@ depends   = 'unite'
 hook_add  = '''
   nnoremap <silent> <space>uo :Unite -no-quit -vertical -winwidth=30 outline<CR>
 '''
+
+[[plugins]]
+repo      = 'darfink/vim-plist'
 
