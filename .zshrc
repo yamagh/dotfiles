@@ -55,6 +55,8 @@
 # CDR
 
   # Load cdr, add-zsh-hook
+  eval `mkdir -p ~/.cache/shell`
+  eval `touch ~/.cache/shell/chpwd-recent-dirs`
   autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
   add-zsh-hook chpwd chpwd_recent_dirs
    
