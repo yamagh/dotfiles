@@ -285,3 +285,5 @@ hook_add  = '''
 [[plugins]]
 repo      = 'darfink/vim-plist'
 
+[[plugins]]
+repo      = 'freitass/todo.txt-vim'
