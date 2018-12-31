@@ -221,7 +221,7 @@ endif
   nnoremap <c-l> <c-w>l
 
   " Tab
-  nnoremap <space>t :tabnew<cr>
+  nnoremap <space>tn :tabnew<cr>
 
   " Netrw
   nnoremap <space>E  :Ex<cr>
@@ -276,6 +276,7 @@ endif
 
   " Todo.txt
   nnoremap <space>mt :e ~/Dropbox/todo/todo.txt<cr>
+  nnoremap <space>mw :e ~/Dropbox/todo/wish.todo.txt<cr>
 
 " ============================================================================
 "  Functions

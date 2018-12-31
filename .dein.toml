@@ -287,3 +287,13 @@ repo      = 'darfink/vim-plist'
 
 [[plugins]]
 repo      = 'freitass/todo.txt-vim'
+
+[[plugins]]
+repo      = 'fatih/vim-go'
+
+[[plugins]]
+repo      = 'mechatroner/rainbow_csv'
+
+[[plugins]]
+repo      = 'chrisbra/csv.vim'
+
