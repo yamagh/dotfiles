@@ -187,7 +187,9 @@ endif
   set ruler
   set scrolloff  =5
   set showcmd
-  set statusline =%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l/%L,%c%V%8P
+  "set statusline =%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l/%L,%c%V%8P
+  set statusline=%<%f\ %h%m%r%=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",BOM\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
+((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\")
   set t_Co       =256
   set nolist
   set nocursorline
