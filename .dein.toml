@@ -286,7 +286,11 @@ hook_add  = '''
 repo      = 'darfink/vim-plist'
 
 [[plugins]]
-repo      = 'freitass/todo.txt-vim'
+repo        = 'freitass/todo.txt-vim'
+on_ft       = 'todo'
+hook_source = '''
+  source ~/.cache/dein/repos/github.com/freitass/todo.txt-vim/ftplugin/todo.vim
+'''
 
 [[plugins]]
 repo      = 'fatih/vim-go'

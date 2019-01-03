@@ -189,7 +189,6 @@ endif
   set showcmd
   "set statusline =%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l/%L,%c%V%8P
   set statusline=%<%f\ %h%m%r%=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",BOM\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
-((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\")
   set t_Co       =256
   set nolist
   set nocursorline
@@ -275,10 +274,11 @@ endif
   " Blog
   inoremap :img ![img]()<esc>Pa=w740
   "inoremap ;;img ![img]()<esc>P :s/=w\d\{1,4\}-h\d\{1,4\}-no/=w740/<cr>
+  nnoremap <space>bn :<c-u>tabnew<cr>:se ft=markdown<cr>:<c-u>cd ~/.ghq/github.com/yamagh/yamagh.github.io/_posts<cr>ijekyll
 
   " Todo.txt
-  nnoremap <space>mt :e ~/Dropbox/todo/todo.txt<cr>
-  nnoremap <space>mw :e ~/Dropbox/todo/wish.todo.txt<cr>
+  nnoremap <space>tt :e ~/Dropbox/todo/todo.txt<cr>
+  nnoremap <space>tf :e ~/Dropbox/todo/fun.todo.txt<cr>
 
 " ============================================================================
 "  Functions
