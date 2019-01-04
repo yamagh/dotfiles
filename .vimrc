@@ -2,6 +2,8 @@ if has('vim_starting')
   set nocompatible
 endif
 
+filetype plugin on
+
 " ============================================================================
 "  VARIABLES
 "
