@@ -276,7 +276,7 @@ filetype plugin on
   " Blog
   inoremap :img ![img]()<esc>Pa=w740
   "inoremap ;;img ![img]()<esc>P :s/=w\d\{1,4\}-h\d\{1,4\}-no/=w740/<cr>
-  nnoremap <space>bn :<c-u>tabnew<cr>:se ft=markdown<cr>:<c-u>cd ~/.ghq/github.com/yamagh/yamagh.github.io/_posts<cr>ijekyll
+  nnoremap <space>bn :<c-u>tabnew<cr>:se ft=markdown<cr>:<c-u>cd ~/.ghq/github.com/yamagh/yamagh.github.io/_posts<cr>iblog
 
   " Todo.txt
   nnoremap <space>tt :e ~/Dropbox/todo/todo.txt<cr>
