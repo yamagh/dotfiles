@@ -157,38 +157,38 @@ mkcd(){
   mkdir $1 && cd $1
 }
 
-cp_help(){
-    echo "usage: cp {init} url"
-    echo 
-    echo "sh function for AtCoder"
-    echo 
-    echo "Arguments:"
-    echo "    init"
-    echo "        Initialization for Competivie Programming."
-    echo "        Make directories and download test cases."
-    echo 
-}
-
-cp(){
-  [ "$1" != "init" ] && cp_help && return
-  [ "$2"  = ""     ] && cp_help && return
-
-  [[ "$2" =~ "(https?://beta.atcoder.jp/contests/)([^/]+)" ]]
-  contest_id=$match[2]
-  [ "$contest_id" = "" ] && cp_help && return
-  echo Contest Id: \"$contest_id\"
-
-  mkdir -p $contest_id/{a,b,c,d}
-  echo ${match[1]}${contest_id}/tasks/${contest_id}_a > $contest_id/a/url
-  echo ${match[1]}${contest_id}/tasks/${contest_id}_b > $contest_id/b/url
-  echo ${match[1]}${contest_id}/tasks/${contest_id}_c > $contest_id/c/url
-  echo ${match[1]}${contest_id}/tasks/${contest_id}_d > $contest_id/d/url
-
-  cd $contest_id/a && oj download `cat url` && cd -
-  cd $contest_id/b && oj download `cat url` && cd -
-  cd $contest_id/c && oj download `cat url` && cd -
-  cd $contest_id/d && oj download `cat url` && cd -
-}
+#cp_help(){
+#    echo "usage: cp {init} url"
+#    echo 
+#    echo "sh function for AtCoder"
+#    echo 
+#    echo "Arguments:"
+#    echo "    init"
+#    echo "        Initialization for Competivie Programming."
+#    echo "        Make directories and download test cases."
+#    echo 
+#}
+#
+#cp(){
+#  [ "$1" != "init" ] && cp_help && return
+#  [ "$2"  = ""     ] && cp_help && return
+#
+#  [[ "$2" =~ "(https?://beta.atcoder.jp/contests/)([^/]+)" ]]
+#  contest_id=$match[2]
+#  [ "$contest_id" = "" ] && cp_help && return
+#  echo Contest Id: \"$contest_id\"
+#
+#  mkdir -p $contest_id/{a,b,c,d}
+#  echo ${match[1]}${contest_id}/tasks/${contest_id}_a > $contest_id/a/url
+#  echo ${match[1]}${contest_id}/tasks/${contest_id}_b > $contest_id/b/url
+#  echo ${match[1]}${contest_id}/tasks/${contest_id}_c > $contest_id/c/url
+#  echo ${match[1]}${contest_id}/tasks/${contest_id}_d > $contest_id/d/url
+#
+#  cd $contest_id/a && oj download `cat url` && cd -
+#  cd $contest_id/b && oj download `cat url` && cd -
+#  cd $contest_id/c && oj download `cat url` && cd -
+#  cd $contest_id/d && oj download `cat url` && cd -
+#}
 
 ###############################################################################
 # OTHER

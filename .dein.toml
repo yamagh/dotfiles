@@ -171,12 +171,12 @@ repo     = 'thinca/vim-quickrun'
 on_cmd   = ['QuickRun']
 hook_add = '''
     nnoremap <space>run  :QuickRun<cr>
-    nnoremap <space>rin0 :QuickRun -input in.0<cr>
-    nnoremap <space>rin1 :QuickRun -input in.1<cr>
-    nnoremap <space>rin2 :QuickRun -input in.2<cr>
-    nnoremap <space>rin3 :QuickRun -input in.3<cr>
-    nnoremap <space>rin4 :QuickRun -input in.4<cr>
-    nnoremap <space>rin5 :QuickRun -input in.5<cr>
+    nnoremap <space>rin1 :QuickRun -input test/sample-1.in<cr>
+    nnoremap <space>rin2 :QuickRun -input test/sample-2.in<cr>
+    nnoremap <space>rin3 :QuickRun -input test/sample-3.in<cr>
+    nnoremap <space>rin4 :QuickRun -input test/sample-4.in<cr>
+    nnoremap <space>rin5 :QuickRun -input test/sample-5.in<cr>
+    nnoremap <space>rin6 :QuickRun -input test/sample-6.in<cr>
 '''
 
 [[plugins]]
