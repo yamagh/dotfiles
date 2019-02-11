@@ -154,7 +154,8 @@ on_cmd = ['<Plug>(DB']
 repo     = 'glidenote/memolist.vim'
 on_cmd   = ['MemoNew','MemoList','MemoGrep']
 hook_add = '''
-    let g:memolist_path = "~/GoogleDrive/Memo"
+    "let g:memolist_path = "~/GoogleDrive/Note"
+    let g:memolist_path = "~/Dropbox/Note"
     let g:memolist_memo_suffix = "md"
     let g:memolist_filename_prefix_none = 1
     let g:memolist_unite = 1
@@ -280,5 +281,51 @@ repo      = 'shougo/unite-outline'
 depends   = 'unite'
 hook_add  = '''
   nnoremap <silent> <space>uo :Unite -no-quit -vertical -winwidth=30 outline<CR>
+'''
+
+[[plugins]]
+repo      = 'darfink/vim-plist'
+
+[[plugins]]
+repo      = 'plasticboy/vim-markdown'
+hook_add  = '''
+  let g:vim_markdown_fenced_languages = ['ruby=rb']
+'''
+
+[[plugins]]
+repo      = 'kannokanno/previm'
+
+[[plugins]]
+repo      = 'tyru/open-browser.vim'
+
+#[[plugins]]
+#repo      = 'vim-scripts/todo-txt.vim'
+
+[[plugins]]
+repo      = 'freitass/todo.txt-vim'
+#hook_add  = '''
+#  let g:Todo_txt_first_level_sort_mode  = "i"
+#  let g:Todo_txt_second_level_sort_mode = "i"
+#
+#  " Use todo#complete as the omni complete function for todo files
+#  au filetype todo setlocal omnifunc=todo#complete
+#
+#  " Auto complete projects
+#  au filetype todo imap <buffer> + +<C-X><C-O>
+#  
+#  " Auto complete contexts
+#  au filetype todo imap <buffer> @ @<C-X><C-O>
+#'''
+
+[[plugins]]
+repo      = 'chrisbra/csv.vim'
+
+[[plugins]]
+repo      = 'davidoc/taskpaper.vim'
+
+[[plugins]]
+repo      = 'iamcco/markdown-preview.vim'
+hook_add  = '''
+  nnoremap <space>mp :<c-u>MarkdownPreview<cr>
 '''
 
