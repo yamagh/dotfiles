@@ -290,11 +290,14 @@ repo        = 'freitass/todo.txt-vim'
 on_ft       = ['todo','todo.txt']
 
 [[plugins]]
-repo      = 'fatih/vim-go'
-
-[[plugins]]
 repo      = 'mechatroner/rainbow_csv'
 
 [[plugins]]
 repo      = 'chrisbra/csv.vim'
+
+[[plugins]]
+repo      = 'iamcco/markdown-preview.vim'
+hook_add  = '''
+  nnoremap <space>mp :<c-u>MarkdownPreview<cr>
+'''
 
