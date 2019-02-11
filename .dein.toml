@@ -154,7 +154,6 @@ on_cmd = ['<Plug>(DB']
 repo     = 'glidenote/memolist.vim'
 on_cmd   = ['MemoNew','MemoList','MemoGrep']
 hook_add = '''
-    "let g:memolist_path = "~/GoogleDrive/Note"
     let g:memolist_path = "~/Dropbox/Note"
     let g:memolist_memo_suffix = "md"
     let g:memolist_filename_prefix_none = 1
@@ -172,12 +171,12 @@ repo     = 'thinca/vim-quickrun'
 on_cmd   = ['QuickRun']
 hook_add = '''
     nnoremap <space>run  :QuickRun<cr>
-    nnoremap <space>rin0 :QuickRun -input in.0<cr>
-    nnoremap <space>rin1 :QuickRun -input in.1<cr>
-    nnoremap <space>rin2 :QuickRun -input in.2<cr>
-    nnoremap <space>rin3 :QuickRun -input in.3<cr>
-    nnoremap <space>rin4 :QuickRun -input in.4<cr>
-    nnoremap <space>rin5 :QuickRun -input in.5<cr>
+    nnoremap <space>rin1 :QuickRun -input test/sample-1.in<cr>
+    nnoremap <space>rin2 :QuickRun -input test/sample-2.in<cr>
+    nnoremap <space>rin3 :QuickRun -input test/sample-3.in<cr>
+    nnoremap <space>rin4 :QuickRun -input test/sample-4.in<cr>
+    nnoremap <space>rin5 :QuickRun -input test/sample-5.in<cr>
+    nnoremap <space>rin6 :QuickRun -input test/sample-6.in<cr>
 '''
 
 [[plugins]]
@@ -287,45 +286,15 @@ hook_add  = '''
 repo      = 'darfink/vim-plist'
 
 [[plugins]]
-repo      = 'plasticboy/vim-markdown'
-hook_add  = '''
-  let g:vim_markdown_fenced_languages = ['ruby=rb']
-'''
+repo        = 'freitass/todo.txt-vim'
+on_ft       = ['todo','todo.txt']
 
 [[plugins]]
-repo      = 'kannokanno/previm'
+repo      = 'fatih/vim-go'
 
 [[plugins]]
-repo      = 'tyru/open-browser.vim'
-
-#[[plugins]]
-#repo      = 'vim-scripts/todo-txt.vim'
-
-[[plugins]]
-repo      = 'freitass/todo.txt-vim'
-#hook_add  = '''
-#  let g:Todo_txt_first_level_sort_mode  = "i"
-#  let g:Todo_txt_second_level_sort_mode = "i"
-#
-#  " Use todo#complete as the omni complete function for todo files
-#  au filetype todo setlocal omnifunc=todo#complete
-#
-#  " Auto complete projects
-#  au filetype todo imap <buffer> + +<C-X><C-O>
-#  
-#  " Auto complete contexts
-#  au filetype todo imap <buffer> @ @<C-X><C-O>
-#'''
+repo      = 'mechatroner/rainbow_csv'
 
 [[plugins]]
 repo      = 'chrisbra/csv.vim'
-
-[[plugins]]
-repo      = 'davidoc/taskpaper.vim'
-
-[[plugins]]
-repo      = 'iamcco/markdown-preview.vim'
-hook_add  = '''
-  nnoremap <space>mp :<c-u>MarkdownPreview<cr>
-'''
 
