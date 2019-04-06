@@ -1,0 +1,2 @@
+#!/bin/sh
+convert -background black -fill white -font '/System/Library/Fonts/ヒラギノ角ゴシック W3.ttc' -pointsize 32 label:"$1" $(date +"%Y-%m-%d-%H%M%S").png

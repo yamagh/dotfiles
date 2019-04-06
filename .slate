@@ -58,7 +58,7 @@ alias todo_txt_mac 'TodoTxtMac'
 bind 1:alt focus ${terminal}
 bind 2:alt focus ${mvim}
 bind 8:alt focus ${todo_txt_mac}
-bind 9:alt focus ${chrome}
+bind 9:alt focus ${safari}
 bind 0:alt focus ${finder}
 
 ## iTerm, Emacs, Google Chrome をぐるぐるする
