@@ -288,6 +288,9 @@ repo      = 'darfink/vim-plist'
 [[plugins]]
 repo        = 'freitass/todo.txt-vim'
 on_ft       = ['todo','todo.txt']
+hook_add    = '''
+  autocmd BufNewFile,BufRead *todo.txt setlocal nonumber
+'''
 
 [[plugins]]
 repo      = 'fatih/vim-go'
