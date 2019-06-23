@@ -242,7 +242,7 @@ filetype plugin on
   nnoremap <space>lcd :lcd %:h<cr>
 
   " Search
-  nnoremap / /\v
+  nnoremap / :se hls<cr>/\v
   nnoremap n nzz
   nnoremap N Nzz
   nnoremap * *zz
@@ -250,7 +250,7 @@ filetype plugin on
   nnoremap g* g*zz
   nnoremap g# g#zz
   nnoremap <space>rep :%s///g<left><left>
-  nnoremap <esc> :<c-u>nohls<cr>
+  nnoremap <esc><esc> :<c-u>nohls<cr>
 
   " Terminal
   if has('nvim')
