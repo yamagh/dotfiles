@@ -250,7 +250,7 @@ filetype plugin on
   nnoremap g* g*zz
   nnoremap g# g#zz
   nnoremap <space>rep :%s///g<left><left>
-  nnoremap <esc><esc> :<c-u>nohls<cr>
+  nnoremap <space><esc> :<c-u>nohls<cr>
 
   " Terminal
   if has('nvim')
