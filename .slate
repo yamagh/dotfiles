@@ -1,26 +1,33 @@
-# config
+# Configs
 config defaultToCurrentScreen true
 config nudgePercentOf screenSize
 config resizePercentOf screenSize
+config secondsBetweenRepeat 0.1
+config checkDefaultsOnLoad true
+config focusCheckWidthMax 3000
 
-# alt-{right,left,up,down} でその方向にウィンドウサイズを変化させる
-bind right:alt       resize +1% +0
-bind left:alt        resize -1% +0
-bind up:alt          resize +0  -2%
-bind down:alt        resize +0  +2%
-
-# 右下の位置を固定してウィンドウサイズを変化させる
-bind right:ctrl;alt  resize -1% +0  bottom-right
-bind left:ctrl;alt   resize +1% +0  bottom-right
-bind up:ctrl;alt     resize +0  +2% bottom-right
-bind down:ctrl;alt   resize +0  -2% bottom-right
-
-# ctrl-alt-shift-{right, left} を押すたびにウィンドウサイズと位置を切り替える
-# chain action1 | action2 と設定すれば押す度に挙動が変化する
+# Key Combinations
 alias cas    ctrl;alt;shift
+
+# Monitor Aliases
+alias mon-laptop      1680x1050
+alias mon-2k          1920x1080
+alias mon-4k          3840×2160
+
+# Position Aliases (2k)
+alias 2-top-l move screenOriginX;screenOriginY               screenSizeX/2;screenSizeY/2   ${mon-2k}
+alias 2-top-m move screenOriginX+screenSizeX/6;screenOriginY 2*screenSizeX/3;screenSizeY/2 ${mon-2k}
+alias 2-top-r move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY/2   ${mon-2k}
+
+# layout (2k)
+layout lay-2k 'MacVim' ${2-top-r} | ${2-top-l} | ${2-top-m}
+
+# Resize Aliases
 alias halfx  bar-resize:screenSizeX/2
 alias halfy  bar-resize:screenSizeY/2
 alias quad   resize:screenSizeX/2;screenSizeY/2
+alias X1-2   ${halfx}
+alias Y1-2   ${halfy}
 alias X1-3   bar-resize:screenSizeX*1/3
 alias Y1-3   bar-resize:screenSizeY*1/3
 alias X2-3   bar-resize:screenSizeX*2/3
@@ -29,24 +36,56 @@ alias X1-4   bar-resize:screenSizeX/4
 alias Y1-4   bar-resize:screenSizeY/4
 alias X3-4   bar-resize:screenSizeX*3/4
 alias Y3-4   bar-resize:screenSizeY*3/4
+alias full   screenSizeX;screenSizeY
 
-bind right:${cas} chain push right ${X1-4} | push right ${X1-3} | push right ${halfx} | push right ${X2-3} | push right ${X3-4} | corner top-right ${quad} | corner bottom-right ${quad}
-bind left:${cas} chain push left ${X1-4} | push left ${X1-3} | push left ${halfx} | push left ${X2-3} | push left ${X3-4} | corner top-left ${quad} | corner bottom-left ${quad}
-bind down:${cas} chain push bottom ${halfy} | push up ${halfy}
+# Resize Bindings - Basic
+bind right:alt       resize +1% +0
+bind left:alt        resize -1% +0
+bind up:alt          resize +0  -2%
+bind down:alt        resize +0  +2%
+bind right:ctrl;alt  resize -1% +0  bottom-right
+bind left:ctrl;alt   resize +1% +0  bottom-right
+bind up:ctrl;alt     resize +0  +2% bottom-right
+bind down:ctrl;alt   resize +0  -2% bottom-right
+bind up:${cas}       corner top-left resize:${full}
 
-# Full Screen
-bind up:${cas}  corner top-left resize:screenSizeX;screenSizeY
+# Move Aliases - Right
+alias M-r1   push right ${X1-4}
+alias M-r2   push right ${X1-3}
+alias M-r3   push right ${X1-2}
+alias M-r4   push right ${X2-3}
+alias M-r5   push right ${X3-4}
+alias M-r6   corner top-right    ${quad}
+alias M-r7   corner bottom-right ${quad}
 
-# Move Window
+# Move Aliases - Left
+alias M-l1   push left ${X1-4}
+alias M-l2   push left ${X1-3}
+alias M-l3   push left ${X1-2}
+alias M-l4   push left ${X2-3}
+alias M-l5   push left ${X3-4}
+alias M-l6   corner top-left    ${quad}
+alias M-l7   corner bottom-left ${quad}
+
+# Move Aliases - Bottom
+alias M-b1   push bottom ${halfy}
+alias M-b2   push up     ${halfy}
+
+# Move Bindings
+bind right:${cas} chain ${M-r1} | ${M-r2} | ${M-r3} | ${M-r4} | ${M-r5} | ${M-r6} | ${M-r7}
+bind left:${cas}  chain ${M-l1} | ${M-l2} | ${M-l3} | ${M-l4} | ${M-l5} | ${M-l6} | ${M-l7}
+bind down:${cas}  chain ${M-b1} | ${M-b2}
+
+# Nudge Bindings
 bind right:shift;alt nudge +1% +0
 bind left:shift;alt  nudge -1% +0
 bind up:shift;alt    nudge +0  -2%
 bind down:shift;alt  nudge +0  +2%
 
 # Undo
-bind `:alt undo
+#bind `:alt undo
 
-# Focus
+# Focus Bindings
 alias finder       'Finder'
 alias terminal     'ターミナル'
 alias safari       'Safari'
@@ -61,16 +100,17 @@ bind 8:alt focus ${todo_txt_mac}
 bind 9:alt focus ${safari}
 bind 0:alt focus ${finder}
 
-## iTerm, Emacs, Google Chrome をぐるぐるする
-#layout jobLayout1 ${safari} push right ${halfx}
-#layout jobLayout1 ${safari} push left ${halfx}
-#layout jobLayout2 ${twitter} push left ${halfx}
-#layout jobLayout2 ${terminal} push right ${halfx}
-#layout jobLayout3 ${terminal} push left ${halfx}
-#layout jobLayout3 ${twitter} push right ${halfx}
-#bind 1:ctrl;alt	  chain sequence layout jobLayout1 > focus ${safari} > focus ${terminal} | sequence layout jobLayout2 > focus ${twitter} > focus ${safari} | sequence layout jobLayout3 > focus ${terminal} > focus ${safari}
-
+# Layout - Dev
 layout L1 ${terminal} push left  ${halfx}
 layout L2 ${mvim}     push right ${halfx}
 bind 1:ctrl;alt	chain sequence layout L1 > sequence layout L2
+
+# Window Hints
+#bind esc:cmd hint
+
+# Switch currently doesn't work well so I'm commenting it out until I fix it.
+#bind tab:ctrl switch
+
+# Grid
+bind esc:ctrl grid
 
