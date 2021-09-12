@@ -87,13 +87,14 @@ alias M-u1   corner top-left resize:${full}
 alias M-u2   sequence ${M-u1} > resize -1% -1% > resize -1% -1% bottom-right
 alias M-u3   sequence ${M-u1} > resize -5% -5% > resize -5% -5% bottom-right
 alias M-u4   sequence ${M-u1} > resize -10% -10% > resize -10% -10% bottom-right
+alias M-u5   sequence ${M-u1} > resize -25% -10% > resize -25% -10% bottom-right
 
 # Move Bindings
 
 bind right:${cas} chain ${M-r1} | ${M-r2} | ${M-r3} | ${M-r4} | ${M-r5} | ${M-r6} | ${M-r7}
 bind left:${cas}  chain ${M-l1} | ${M-l2} | ${M-l3} | ${M-l4} | ${M-l5} | ${M-l6} | ${M-l7}
 bind down:${cas}  chain ${M-b1} | ${M-b2}
-bind up:${cas}    chain ${M-u1} | ${M-u2} | ${M-u3} | ${M-u4}
+bind up:${cas}    chain ${M-u1} | ${M-u2} | ${M-u3} | ${M-u4} | ${M-u5}
 
 # Nudge Bindings
 
