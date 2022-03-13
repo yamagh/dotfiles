@@ -15,7 +15,7 @@ alias cas    ctrl;alt;shift
 
 alias mon-laptop      1680x1050
 alias mon-2k          1920x1080
-alias mon-4k          3840×2160
+alias mon-4k          3840x2160
 
 # Position Aliases (2k)
 
@@ -87,14 +87,15 @@ alias M-u1   corner top-left resize:${full}
 alias M-u2   sequence ${M-u1} > resize -1% -1% > resize -1% -1% bottom-right
 alias M-u3   sequence ${M-u1} > resize -5% -5% > resize -5% -5% bottom-right
 alias M-u4   sequence ${M-u1} > resize -10% -10% > resize -10% -10% bottom-right
-alias M-u5   sequence ${M-u1} > resize -25% -10% > resize -25% -10% bottom-right
+alias M-u5   sequence ${M-u1} > resize -15% -5% > resize -15% -5% bottom-right
+alias M-u6   sequence ${M-u1} > resize -25% -10% > resize -25% -10% bottom-right
 
 # Move Bindings
 
 bind right:${cas} chain ${M-r1} | ${M-r2} | ${M-r3} | ${M-r4} | ${M-r5} | ${M-r6} | ${M-r7}
 bind left:${cas}  chain ${M-l1} | ${M-l2} | ${M-l3} | ${M-l4} | ${M-l5} | ${M-l6} | ${M-l7}
 bind down:${cas}  chain ${M-b1} | ${M-b2}
-bind up:${cas}    chain ${M-u1} | ${M-u2} | ${M-u3} | ${M-u4} | ${M-u5}
+bind up:${cas}    chain ${M-u1} | ${M-u2} | ${M-u3} | ${M-u4} | ${M-u5} | ${M-u6}
 
 # Nudge Bindings
 
@@ -138,5 +139,7 @@ bind 1:ctrl;alt	chain sequence layout L1 > sequence layout L2
 
 # Grid
 
-bind esc:ctrl grid padding:3 1920x1080:3,2
-
+alias G1  grid padding:3 1920x1080:3,2
+alias G2  grid padding:3 1920x1080:6,4
+alias G3  grid padding:3 1920x1080:6,16
+bind esc:ctrl chain ${G1} | ${G2} | ${G3}
